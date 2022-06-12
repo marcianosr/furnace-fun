@@ -10,6 +10,7 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
+	console.log("hi");
 	const browser = await puppeteer.launch();
 	const banjoKazooiePage = await browser.newPage();
 	await banjoKazooiePage.goto(
