@@ -50,7 +50,11 @@ const Home: NextPage<Props> = ({ questions }) => {
 export default Home;
 
 export async function getServerSideProps() {
-	const res = await fetch("http://localhost:3000/api/questions");
+	const dev = process.env.NODE_ENV !== "production";
+	const apiUrl = dev
+		? "http://localhost:3000"
+		: "https://bk-furnace-fun.vercel.app";
+	const res = await fetch(`${apiUrl}/api/questions`);
 	const questions = await res.json();
 
 	return {
