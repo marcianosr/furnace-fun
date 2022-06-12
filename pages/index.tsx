@@ -3,7 +3,7 @@ import Head from "next/head";
 import React, { useEffect } from "react";
 import TagManager from "react-gtm-module";
 import LightCanvas from "../components/LightCanvas";
-import QuestionContainer from "../components/question/QuestionContainer";
+import QuestionContainer from "../components/QuestionContainer";
 import styles from "../styles/Home.module.css";
 
 type Props = {
@@ -21,10 +21,8 @@ const tagManagerArgs = {
 };
 
 const Home: NextPage<Props> = ({ questions }) => {
-	useEffect(() => {
-		TagManager.initialize(tagManagerArgs);
-		console.log(TagManager.dataLayer);
-	}, []);
+	console.log(questions.length);
+
 	return (
 		<div className={styles.container}>
 			<Head>

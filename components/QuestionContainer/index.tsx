@@ -2,8 +2,8 @@ import React, { FC, useEffect, useState } from "react";
 import { useLocalStorage } from "react-use";
 import StatsModal from "../StatsModal";
 import { useCountdown } from "../../hooks/useCountdown";
-import Question from ".";
-import styles from "./styles.module.css";
+import Question from "../Question";
+import styles from "../Question/styles.module.css";
 
 export type QuestionProps = {
 	questions: any;
@@ -20,9 +20,6 @@ type Storage = {
 	maxStreak: number;
 	currentStreak: number;
 };
-
-const getNewQuestion = (isReady: boolean, questions: any) =>
-	isReady && questions[Math.floor(Math.random() * questions.length)];
 
 const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	const randomQuestion =
@@ -47,7 +44,6 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	const [modal, setModal] = useState(false);
 
 	const checkAnswer = (givenAnswer: string) => {
-		console.log(givenAnswer, question?.goodAnswer);
 		return givenAnswer === question?.goodAnswer;
 	};
 

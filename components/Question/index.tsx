@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import Answer from "../Answer";
+import { QuestionType } from "../QuestionContainer";
 import RoundContainer from "../RoundContainer";
-import { QuestionType } from "./QuestionContainer";
 import styles from "./styles.module.css";
 
 export type QuestionProps = {
