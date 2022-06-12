@@ -39,7 +39,12 @@ export async function getServerSideProps() {
 	const apiUrl = dev
 		? "http://localhost:3000"
 		: "https://furnace-fun.vercel.app";
-	const res = await fetch(`${apiUrl}/api/questions`);
+	const res = await fetch(`${apiUrl}/api/questions`, {
+		headers: {
+			Accept: "application/json, text/plain, */*",
+			"User-Agent": "*",
+		},
+	});
 	const questions = await res.json();
 
 	return {
