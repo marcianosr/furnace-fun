@@ -38,7 +38,7 @@ export async function getServerSideProps() {
 	const dev = process.env.NODE_ENV !== "production";
 	const apiUrl = dev
 		? "http://localhost:3000"
-		: "https://furnace-fun.vercel.app/";
+		: "https://furnace-fun.vercel.app";
 	const res = await fetch(`${apiUrl}/api/questions`);
 	const questions = await res.json();
 
