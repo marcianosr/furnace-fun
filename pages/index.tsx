@@ -35,8 +35,6 @@ const Home: NextPage<Props> = ({ questions }) => {
 			</Head>
 
 			<main className={styles.main}>
-				{/* <h1 className={styles.title}>Welcome to Furnace Fun</h1>   */}
-
 				<LightCanvas>
 					<section className={styles.poster}>
 						<QuestionContainer questions={questions} />
