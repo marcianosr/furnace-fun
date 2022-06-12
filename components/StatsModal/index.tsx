@@ -25,7 +25,7 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 					{stats.correctAnswer ? (
 						<p>
 							Your answer was correct, you were in luck, tomorrow
-							I'll test some more BK intellect!
+							I will test some more BK intellect!
 						</p>
 					) : (
 						<p>
@@ -62,6 +62,7 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 					<RoundContainer>
 						<a
 							target={"_blank"}
+							rel="noreferrer"
 							className={styles.text}
 							href="mailto:msrschildmeijer@gmail.com"
 						>
@@ -71,6 +72,7 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 					<RoundContainer>
 						<a
 							target={"_blank"}
+							rel="noreferrer"
 							className={styles.text}
 							href="https://twitter.com/MarcianoSRS/"
 						>

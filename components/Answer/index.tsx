@@ -54,7 +54,7 @@ const getRandNumbers = () => {
 };
 
 const getRandomMug: string[] = Array.from(getRandNumbers()).map((n) => {
-	return mugs[n];
+	return mugs[n as any];
 });
 
 const Answer: FC<AnswerProps> = ({
