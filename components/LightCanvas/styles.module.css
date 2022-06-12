@@ -1,0 +1,107 @@
+.container {
+	/* min-width: 400px; */
+	--size: 25px;
+
+	width: 100%;
+	max-width: 1044px;
+	height: 653px;
+	padding: 2rem 3rem;
+	background-color: black;
+
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+}
+
+.lightContainer {
+	position: absolute;
+	gap: 0.45rem;
+	display: flex;
+}
+
+.top {
+	top: 38px;
+	left: 10px;
+	flex-direction: column;
+}
+
+.left {
+	top: 5px;
+	left: 10px;
+}
+
+.right {
+	bottom: 7px;
+	right: 11px;
+}
+
+.bottom {
+	top: 5px;
+	right: 10px;
+	flex-direction: column;
+}
+
+.light {
+	width: var(--size);
+	height: var(--size);
+	background-color: var(--light);
+	border-radius: 4rem;
+}
+
+.light:nth-child(3n + 1) {
+	--light: red;
+	animation-name: lightsRed;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+
+.light:nth-child(3n + 2) {
+	--light: blue;
+	animation-name: lightsBlue;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+
+.light:nth-child(3n + 3) {
+	--light: yellow;
+	animation-name: lightsYellow;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes lightsRed {
+	0% {
+		background-color: red;
+	}
+	35% {
+		background-color: yellow;
+	}
+	70% {
+		background-color: blue;
+	}
+}
+
+@keyframes lightsBlue {
+	0% {
+		background-color: blue;
+	}
+	35% {
+		background-color: red;
+	}
+	70% {
+		background-color: yellow;
+	}
+}
+
+@keyframes lightsYellow {
+	0% {
+		background-color: yellow;
+	}
+	35% {
+		background-color: blue;
+	}
+	70% {
+		background-color: red;
+	}
+}

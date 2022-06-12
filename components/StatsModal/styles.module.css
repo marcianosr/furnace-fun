@@ -1,0 +1,39 @@
+.statsModal {
+	position: absolute;
+	z-index: 1;
+	min-width: 700px;
+	max-width: 900px;
+	min-height: 400px;
+	background: transparent;
+	border: 0;
+	top: 4rem;
+}
+
+.statsModal h1 {
+	color: white;
+	margin-top: 1rem;
+	font-family: "Lithos Pro Black";
+	font-size: 4rem;
+	text-align: center;
+	letter-spacing: -7px;
+	color: blue;
+	text-shadow: -3px -3px 0 yellow, 3px -3px 0 yellow, -3px 3px 0 yellow,
+		3px 3px 0 yellow;
+}
+
+.statsModal ul {
+	display: flex;
+	padding: 0;
+	gap: 1rem;
+	line-height: 1;
+}
+
+.statsModal ul li {
+	margin-top: 1rem;
+}
+
+.text {
+	line-height: 1;
+	margin-top: 1rem;
+	font-size: 1.25rem;
+}

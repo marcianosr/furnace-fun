@@ -1,0 +1,64 @@
+.container {
+	border-radius: 10rem;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 1.5rem;
+	font-family: "CCComic";
+	color: white;
+	transition: color 0.35s ease-out;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	font-size: 1.5rem;
+	position: relative;
+}
+
+.mug {
+	transition: opacity 0.35s ease-in;
+}
+
+.mug,
+.container input {
+	position: absolute;
+}
+
+.largeMug {
+	left: -25px;
+	top: -63px;
+}
+
+.container input {
+	left: 10rem;
+}
+
+.container input:checked + p {
+	color: white;
+}
+
+.container input {
+	display: none;
+}
+
+/* align text better, probably font issue */
+.container p {
+	padding-left: 7rem;
+	padding-right: 1rem;
+	line-height: 1;
+	margin: 0;
+	margin-top: 1rem;
+}
+
+label .container:not(:hover) {
+	color: #5c5c5c;
+}
+
+label .container:not(:hover) .mug {
+	opacity: 0.3;
+}
+
+.container a {
+	text-decoration: underline;
+}
+
+label .container:not(:hover) .active {
+	opacity: 1;
+}
