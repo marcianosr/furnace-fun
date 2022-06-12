@@ -15,12 +15,6 @@ export type QuestionType = {
 	goodAnswer: string;
 };
 
-type Storage = {
-	gamesPlayed: number;
-	maxStreak: number;
-	currentStreak: number;
-};
-
 const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	const randomQuestion =
 		questions[Math.floor(Math.random() * questions.length)];
