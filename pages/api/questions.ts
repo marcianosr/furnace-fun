@@ -114,12 +114,12 @@ export default async function handler(
 
 	await browser.close();
 
-	console.log(
-		"JSON.stringify([...BKQuestions, ...BTQuestions]),",
-		JSON.stringify([...BKQuestions, ...BTQuestions])
-	);
+	// console.log(
+	// 	"JSON.stringify([...BKQuestions, ...BTQuestions]),",
+	// 	JSON.stringify([...BKQuestions, ...BTQuestions])
+	// );
 
 	res.status(200).json({
-		questions: [...BKQuestions, ...BTQuestions],
+		questions: JSON.stringify([...BKQuestions, ...BTQuestions]),
 	});
 }
