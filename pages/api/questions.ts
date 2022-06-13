@@ -10,12 +10,14 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
-	console.log("hi");
 	const browser = await puppeteer.launch();
 	const banjoKazooiePage = await browser.newPage();
 	await banjoKazooiePage.goto(
 		"https://strategywiki.org/wiki/Banjo-Kazooie/Grunty%27s_Furnace_Fun"
 	);
+
+	console.log("banjoKazooiePage", banjoKazooiePage);
+
 	const banjoTooiePage = await browser.newPage();
 	await banjoTooiePage.goto(
 		"https://banjokazooie.fandom.com/wiki/List_of_Questions_From_Tower_of_Tragedy"
@@ -26,6 +28,8 @@ export default async function handler(
 			(tr) => tr.innerHTML
 		);
 	});
+
+	console.log("Scrapesd BK", scrapedBanjoKazooie);
 
 	const scrapedBanjoTooie = await banjoTooiePage.evaluate(() => {
 		return [...document.querySelectorAll(".mw-parser-output > p")].map(
