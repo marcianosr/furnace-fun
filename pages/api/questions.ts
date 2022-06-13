@@ -16,8 +16,6 @@ export default async function handler(
 		"https://strategywiki.org/wiki/Banjo-Kazooie/Grunty%27s_Furnace_Fun"
 	);
 
-	console.log("banjoKazooiePage", banjoKazooiePage);
-
 	const banjoTooiePage = await browser.newPage();
 	await banjoTooiePage.goto(
 		"https://banjokazooie.fandom.com/wiki/List_of_Questions_From_Tower_of_Tragedy"
@@ -29,15 +27,11 @@ export default async function handler(
 		);
 	});
 
-	console.log("Scrapesd BK", scrapedBanjoKazooie);
-
 	const scrapedBanjoTooie = await banjoTooiePage.evaluate(() => {
 		return [...document.querySelectorAll(".mw-parser-output > p")].map(
 			(p) => p.innerHTML
 		);
 	});
-
-	// console.log(scrapedBanjoTooie);
 
 	const BKQuestions = scrapedBanjoKazooie
 		.map((item) => item.replace(/(<([^>]+)>)/gi, ""))

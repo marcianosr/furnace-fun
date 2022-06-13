@@ -1,15 +1,26 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import LightCanvas from "../components/LightCanvas";
 import QuestionContainer from "../components/QuestionContainer";
 import styles from "../styles/Home.module.css";
 
-type Props = {
-	questions: any;
-};
+type Props = {};
 
-const Home: NextPage<Props> = ({ questions }) => {
+const getAllQuestions = (apiUrl: string) =>
+	fetch(`${apiUrl}/api/questions`).then((data) => data.json());
+
+const Home: NextPage<Props> = () => {
+	const [questions, setQuestions] = useState([]);
+
+	useEffect(() => {
+		const dev = process.env.NODE_ENV !== "production";
+		const apiUrl = dev
+			? "http://localhost:3000"
+			: "https://furnace-fun.vercel.app";
+
+		getAllQuestions(apiUrl).then((data) => setQuestions(data.questions));
+	}, []);
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -24,7 +35,9 @@ const Home: NextPage<Props> = ({ questions }) => {
 			<main className={styles.main}>
 				<LightCanvas>
 					<section className={styles.poster}>
-						<QuestionContainer questions={questions} />
+						{questions.length > 0 && (
+							<QuestionContainer questions={questions} />
+						)}
 					</section>
 				</LightCanvas>
 			</main>
@@ -34,23 +47,17 @@ const Home: NextPage<Props> = ({ questions }) => {
 
 export default Home;
 
-export async function getServerSideProps() {
-	const dev = process.env.NODE_ENV !== "production";
-	const apiUrl = dev
-		? "http://localhost:3000"
-		: "https://furnace-fun.vercel.app";
+// export async function getStaticPaths() {
+// 	const dev = process.env.NODE_ENV !== "production";
+// 	const apiUrl = dev
+// 		? "http://localhost:3000"
+// 		: "https://furnace-fun.vercel.app";
 
-	try {
-		const res = await fetch(`${apiUrl}/api/questions`);
-		console.log(res, "res");
-		const questions = await res.json();
+// 	const res = await fetch(`${apiUrl}/api/questions`);
+// 	console.log(res, "res");
+// 	const questions = await res.json();
 
-		return {
-			props: { ...questions },
-		};
-	} catch (err) {
-		console.log("err: ", err);
-
-		return { props: {} };
-	}
-}
+// 	return {
+// 		props: { ...questions },
+// 	};
+// }
