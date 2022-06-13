@@ -19,7 +19,9 @@ const Home: NextPage<Props> = () => {
 			? "http://localhost:3000"
 			: "https://furnace-fun.vercel.app";
 
-		getAllQuestions(apiUrl).then((data) => setQuestions(data.questions));
+		getAllQuestions(apiUrl).then((data) =>
+			setQuestions(JSON.parse(data.questions))
+		);
 	}, []);
 	return (
 		<div className={styles.container}>

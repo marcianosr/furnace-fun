@@ -33,6 +33,8 @@ export default async function handler(
 		);
 	});
 
+	console.log("S", scrapedBanjoKazooie);
+
 	const BKQuestions = scrapedBanjoKazooie
 		.map((item) => item.replace(/(<([^>]+)>)/gi, ""))
 		.map((item) => item.replace(/\n/gi, ""))
@@ -115,6 +117,6 @@ export default async function handler(
 	await browser.close();
 
 	res.status(200).json({
-		questions: [...BKQuestions, ...BTQuestions],
+		questions: JSON.stringify([...BKQuestions, ...BTQuestions]),
 	});
 }
