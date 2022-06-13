@@ -12,7 +12,7 @@ const getAllQuestions = (apiUrl: string) =>
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
-			Accept: "application/json",
+			Accept: "application/json; charset=UTF-8",
 			"User-Agent": "*", // 👈
 		},
 	})
