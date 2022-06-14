@@ -13,24 +13,29 @@ export default async function handler(
 ) {
 	await NextCors(req, res, {
 		// Options
-		methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+		methods: ["GET", "POST"],
 		origin: "*",
 		optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 	});
 
-	return res.status(200).json({
-		questions: JSON.stringify([
-			{
-				answers: ["9", "8", "7"],
-				game: "Banjo-Kazooie",
-				goodAnswer: "8",
-				id: "BK-1",
-				question:
-					"Sprial Mountain's got my face, how many molehills are in this place?",
-				questionType: "general",
-			},
-		]),
-	});
+	try {
+		return res.status(200).json({
+			questions: JSON.stringify([
+				{
+					answers: ["9", "8", "7"],
+					game: "Banjo-Kazooie",
+					goodAnswer: "8",
+					id: "BK-1",
+					question:
+						"Sprial Mountain's got my face, how many molehills are in this place?",
+					questionType: "general",
+				},
+			]),
+		});
+	} catch (e) {
+		res.status(400).json({ error: (e as Error).message } as any);
+	}
+
 	const browser = await puppeteer.launch();
 	const banjoKazooiePage = await browser.newPage();
 	await banjoKazooiePage.goto(
