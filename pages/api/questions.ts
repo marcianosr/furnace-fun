@@ -10,6 +10,19 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
+	return res.status(200).json({
+		questions: JSON.stringify([
+			{
+				answers: ["9", "8", "7"],
+				game: "Banjo-Kazooie",
+				goodAnswer: "8",
+				id: "BK-1",
+				question:
+					"Sprial Mountain's got my face, how many molehills are in this place?",
+				questionType: "general",
+			},
+		]),
+	});
 	const browser = await puppeteer.launch();
 	const banjoKazooiePage = await browser.newPage();
 	await banjoKazooiePage.goto(
