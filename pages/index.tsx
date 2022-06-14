@@ -8,7 +8,22 @@ import styles from "../styles/Home.module.css";
 type Props = {};
 
 const getAllQuestions = (apiUrl: string) =>
-	fetch(`${apiUrl}/api/questions`).then((data) => data.json());
+	fetch(`${apiUrl}/api/questions`, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		// headers: {
+		// 	"Content-Type": "application/json",
+		// 	Accept: "application/json; charset=UTF-8",
+		// 	"User-Agent": "*", // 👈
+		// },
+	})
+		.then((data) => data.json())
+		.catch((error) => {
+			console.log(error);
+			return error;
+		});
 
 const Home: NextPage<Props> = () => {
 	const [questions, setQuestions] = useState([]);
@@ -19,9 +34,11 @@ const Home: NextPage<Props> = () => {
 			? "http://localhost:3000"
 			: "https://furnace-fun.vercel.app";
 
-		getAllQuestions(apiUrl).then((data) =>
-			setQuestions(JSON.parse(data.questions))
-		);
+		getAllQuestions(apiUrl).then((data) => {
+			console.log("d", JSON.parse(data.questions));
+			// return setQuestions([]);
+			return setQuestions(JSON.parse(data.questions));
+		});
 	}, []);
 	return (
 		<div className={styles.container}>

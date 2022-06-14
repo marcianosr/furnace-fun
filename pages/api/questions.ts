@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import NextCors from "nextjs-cors";
 import puppeteer from "puppeteer";
 
 type Data = {
@@ -10,6 +11,31 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
+	await NextCors(req, res, {
+		// Options
+		methods: ["GET", "POST"],
+		origin: "*",
+		optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+	});
+
+	try {
+		return res.status(200).json({
+			questions: JSON.stringify([
+				{
+					answers: ["9", "8", "7"],
+					game: "Banjo-Kazooie",
+					goodAnswer: "8",
+					id: "BK-1",
+					question:
+						"Sprial Mountain's got my face, how many molehills are in this place?",
+					questionType: "general",
+				},
+			]),
+		});
+	} catch (e) {
+		return res.status(400).json({ error: (e as Error).message } as any);
+	}
+
 	const browser = await puppeteer.launch();
 	const banjoKazooiePage = await browser.newPage();
 	await banjoKazooiePage.goto(
@@ -115,6 +141,11 @@ export default async function handler(
 		});
 
 	await browser.close();
+
+	// console.log(
+	// 	"JSON.stringify([...BKQuestions, ...BTQuestions]),",
+	// 	JSON.stringify([...BKQuestions, ...BTQuestions])
+	// );
 
 	res.status(200).json({
 		questions: JSON.stringify([...BKQuestions, ...BTQuestions]),
