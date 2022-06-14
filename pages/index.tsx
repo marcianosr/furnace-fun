@@ -32,7 +32,7 @@ const Home: NextPage<Props> = () => {
 			: "https://furnace-fun.vercel.app";
 
 		getAllQuestions(apiUrl).then((data) => {
-			console.log("d", data);
+			console.log("d", JSON.parse(data.questions));
 			// return setQuestions([]);
 			return setQuestions(JSON.parse(data.questions));
 		});
