@@ -33,7 +33,7 @@ export default async function handler(
 			]),
 		});
 	} catch (e) {
-		res.status(400).json({ error: (e as Error).message } as any);
+		return res.status(400).json({ error: (e as Error).message } as any);
 	}
 
 	const browser = await puppeteer.launch();
