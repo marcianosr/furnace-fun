@@ -4,8 +4,8 @@ const nextConfig = {
 	async rewrites() {
 		return [
 			{
-				source: "/api/questions*",
-				destination: "https://furnace-fun.vercel.app/api/questions*",
+				source: "/api/questions",
+				destination: "https://furnace-fun.vercel.app/api/questions",
 			},
 		];
 	},
