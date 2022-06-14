@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import NextCors from "nextjs-cors";
 import puppeteer from "puppeteer";
 
 type Data = {
@@ -10,6 +11,13 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
+	await NextCors(req, res, {
+		// Options
+		methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+		origin: "*",
+		optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+	});
+
 	return res.status(200).json({
 		questions: JSON.stringify([
 			{
