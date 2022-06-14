@@ -10,6 +10,9 @@ type Props = {};
 const getAllQuestions = (apiUrl: string) =>
 	fetch(`${apiUrl}/api/questions`, {
 		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
 		// headers: {
 		// 	"Content-Type": "application/json",
 		// 	Accept: "application/json; charset=UTF-8",
