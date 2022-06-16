@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Script from "next/script";
 import React, { useEffect, useState } from "react";
 import LightCanvas from "../components/LightCanvas";
 import QuestionContainer from "../components/QuestionContainer";
@@ -42,6 +43,19 @@ const Home: NextPage<Props> = () => {
 	}, []);
 	return (
 		<div className={styles.container}>
+			<Script
+				strategy="lazyOnload"
+				src="https://www.googletagmanager.com/gtag/js?id=G-ML3PGJYT1S"
+			/>
+
+			<Script strategy="lazyOnload">
+				{`
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+					gtag('config', 'G-ML3PGJYT1S')
+					`}
+			</Script>
 			<Head>
 				<title>Furnace Fun</title>
 				<meta
