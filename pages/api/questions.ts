@@ -1,7 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
-import puppeteer from "puppeteer";
 
 type Data = {
 	questions: any;
@@ -22,13 +21,17 @@ export default async function handler(
 		"https://strategywiki.org/wiki/Banjo-Kazooie/Grunty%27s_Furnace_Fun"
 	).then((data) => data.text());
 
+	const banjoTooiePage = await fetch(
+		"https://banjokazooie.fandom.com/wiki/List_of_Questions_From_Tower_of_Tragedy"
+	).then((data) => data.text());
+
 	const html = banjoKazooiePage.split('<table class="wikitable prettytable"');
 	const scrapedBanjoKazooieQuestions = html[1].split("</table>")[0];
 
 	const scrapedBK = scrapedBanjoKazooieQuestions
 		.replace(/(<([^>]+)>)/gi, "")
-		// .replace(/\n/gi, "")
 		.replace(/&nbsp;/i, "");
+
 	const questions = scrapedBK.split("?").map(
 		(question) =>
 			question
@@ -37,84 +40,48 @@ export default async function handler(
 				.slice(-1)[0]
 	);
 
-	const answers = scrapedBK.split("?").map((question) =>
-		question
-			.split("\n")
-			.filter((a) => a)
-			.slice(0, -1)
-	);
+	const answers = scrapedBK
+		.split("?")
+		.map((question) =>
+			question
+				.split("\n")
+				.filter((a) => a)
+				.slice(0, -1)
+		)
+		.slice(1);
 
 	const correctAnswer = scrapedBK.split("?").map((question) =>
 		question
 			.split("\n")
 			.filter((a) => a)
 			.find((text) => text.includes("O -"))
+			?.split("O -")[1]
+			.trim()
 	);
-
 	const BKQuestions = questions.map((question, idx) => {
 		return {
 			id: `BK-${idx}`,
-			question,
-			answers: answers[idx].map((answer) => answer.split(/X -|O -/)),
-			correctAnswer: correctAnswer[idx],
+			question: `${question}?`,
+			answers: answers[idx]?.map((answer) =>
+				answer
+					.split(/X -|O -/)
+					.filter((a) => a)[0]
+					.trim()
+			),
+			correctAnswer: correctAnswer[idx + 1],
 			game: "Banjo-Kazooie",
 			questionType: "general",
 		};
 	});
 
+	// console.log(BKQuestions);
+
+	// TODO: Banjo Tooie
+
+	// const html2 = banjoTooiePage.split("General Knowledge");
+	// const scrapedBTQuestions = html2[1].split("render-wiki-recommendations")[0];
+
 	return res
 		.status(200)
 		.json({ questions: JSON.stringify([...BKQuestions]) } as any);
-
-	// const BTQuestions = scrapedBanjoTooie
-	// 	.map((item) => item.replace(/(<([^>]+)>)/gi, ""))
-	// 	.map((item) => item.replace(/\n/gi, ""))
-	// 	.map((item) => item.replace(/&nbsp;/i, ""))
-	// 	.map((q, idx) => {
-	// 		const answers: string = q.split("?")[1];
-
-	// 		if (answers) {
-	// 			const getAnswers = answers.split("x -");
-
-	// 			const answerStrings = getAnswers
-	// 				.filter((answer) => answer.includes("o -"))[0]
-	// 				.split(/^o - | ^o -$/)
-	// 				.filter((a) => a);
-
-	// 			const trimStringAnswers = answerStrings[0].split(/o - |o -$/);
-	// 			const findGoodAnswer =
-	// 				trimStringAnswers.length > 1
-	// 					? trimStringAnswers[1]
-	// 					: trimStringAnswers[0];
-
-	// 			const answerList = q
-	// 				.split("?")[1]
-	// 				.split(/x -|o -/)
-	// 				.filter((a: string) => a);
-
-	// 			return {
-	// 				id: `BT-${idx}`,
-	// 				question: q.split("?")[0] + "?",
-	// 				answers: answerList.map((t) => t.trim()),
-	// 				goodAnswer: findGoodAnswer.trim(),
-	// 				game: "Banjo-Tooie",
-	// 				questionType: "general",
-	// 			};
-	// 		}
-	// 	})
-	// 	.filter((a) => a)
-	// 	.filter((a) => {
-	// 		return a?.id !== "BT-219";
-	// 	});
-
-	// await browser.close();
-
-	// try {
-	// 	return res.status(200).json({
-	// 		questions: JSON.stringify([...BKQuestions, ...BTQuestions]),
-	// 	});
-
-	// } catch (e) {
-	// 	return res.status(400).json({ error: (e as Error).message } as any);
-	// }
 }

@@ -12,7 +12,7 @@ export type QuestionProps = {
 export type QuestionType = {
 	question: string;
 	answers: string[];
-	goodAnswer: string;
+	correctAnswer: string;
 };
 
 const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
@@ -38,7 +38,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	const [modal, setModal] = useState(false);
 
 	const checkAnswer = (givenAnswer: string) => {
-		return givenAnswer === question?.goodAnswer;
+		return givenAnswer === question?.correctAnswer;
 	};
 
 	useEffect(() => {
