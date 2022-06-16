@@ -45,11 +45,10 @@ const Home: NextPage<Props> = () => {
 		<div className={styles.container}>
 			<Script
 				strategy="lazyOnload"
-				id="analytics"
 				src="https://www.googletagmanager.com/gtag/js?id=G-ML3PGJYT1S"
 			/>
 
-			<Script strategy="lazyOnload">
+			<Script id="analytics" strategy="lazyOnload">
 				{`
 					window.dataLayer = window.dataLayer || [];
 					function gtag(){dataLayer.push(arguments);}
