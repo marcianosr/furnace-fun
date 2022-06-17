@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import ReactGA from "react-ga";
 import Script from "next/script";
 import React, { useEffect, useState } from "react";
 import LightCanvas from "../components/LightCanvas";
@@ -30,6 +31,9 @@ const Home: NextPage<Props> = () => {
 	const [questions, setQuestions] = useState([]);
 
 	useEffect(() => {
+		ReactGA.initialize("G-ML3PGJYT1S", { debug: true });
+		ReactGA.pageview(window.location.pathname + window.location.search);
+		console.log("React ga");
 		const dev = process.env.NODE_ENV !== "production";
 		const apiUrl = dev
 			? "http://localhost:3000"
@@ -43,7 +47,7 @@ const Home: NextPage<Props> = () => {
 	}, []);
 	return (
 		<div className={styles.container}>
-			<Script
+			{/* <Script
 				strategy="lazyOnload"
 				src="https://www.googletagmanager.com/gtag/js?id=G-ML3PGJYT1S"
 			/>
@@ -55,7 +59,22 @@ const Home: NextPage<Props> = () => {
 					gtag('js', new Date());
 					gtag('config', 'G-ML3PGJYT1S')
 					`}
-			</Script>
+			</Script> */}
+			{/* <Script id="tagmanager" strategy="lazyOnload">{`
+				(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5GJZ4MF');`}</Script>
+
+			<noscript>
+				<iframe
+					src="https://www.googletagmanager.com/ns.html?id=GTM-5GJZ4MF"
+					height="0"
+					width="0"
+					style="display:none;visibility:hidden"
+				></iframe>
+			</noscript> */}
 			<Head>
 				<title>Furnace Fun</title>
 				<meta
