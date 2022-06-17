@@ -95,9 +95,21 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		setModal(true);
 
 		ReactGA.event({
-			category: "User interaction",
+			category: "Stats: Max Streak",
 			action: "Submit question",
-			label: JSON.stringify(stats), // optional
+			label: stats.maxStreak,
+		});
+
+		ReactGA.event({
+			category: "Stats: Current Streak",
+			action: "Submit question",
+			label: stats.currentStreak,
+		});
+
+		ReactGA.event({
+			category: "Stats: Games played",
+			action: "Submit question",
+			label: stats.currentStreak,
 		});
 	};
 
