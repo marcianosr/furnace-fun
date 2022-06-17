@@ -92,6 +92,8 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 			correctAnswer: isCorrectAnswer,
 		});
 
+		console.log(window.dataLayer);
+
 		setModal(true);
 
 		(window as any).dataLayer?.push({
