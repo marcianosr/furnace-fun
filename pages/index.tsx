@@ -31,23 +31,22 @@ const Home: NextPage<Props> = () => {
 	const [questions, setQuestions] = useState([]);
 
 	useEffect(() => {
-		ReactGA.initialize("G-ML3PGJYT1S", { debug: true });
-		ReactGA.pageview(window.location.pathname + window.location.search);
-		console.log("React ga");
+		// ReactGA.initialize("G-ML3PGJYT1S", { debug: true });
+		// ReactGA.pageview(window.location.pathname + window.location.search);
+		// console.log("React ga");
 		const dev = process.env.NODE_ENV !== "production";
 		const apiUrl = dev
 			? "http://localhost:3000"
 			: "https://furnace-fun.vercel.app";
 
 		getAllQuestions(apiUrl).then((data) => {
-			console.log("d", JSON.parse(data.questions));
 			// return setQuestions([]);
 			return setQuestions(JSON.parse(data.questions));
 		});
 	}, []);
 	return (
 		<div className={styles.container}>
-			{/* <Script
+			<Script
 				strategy="lazyOnload"
 				src="https://www.googletagmanager.com/gtag/js?id=G-ML3PGJYT1S"
 			/>
@@ -59,7 +58,7 @@ const Home: NextPage<Props> = () => {
 					gtag('js', new Date());
 					gtag('config', 'G-ML3PGJYT1S')
 					`}
-			</Script> */}
+			</Script>
 			{/* <Script id="tagmanager" strategy="lazyOnload">{`
 				(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
