@@ -1,5 +1,6 @@
 import classNames from "classnames";
-import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
+import { useMedia } from "react-use";
 import styles from "./styles.module.css";
 
 type LightCanvasProps = {
@@ -13,10 +14,11 @@ const LightCanvas: FC<LightCanvasProps> = ({ children }) => {
 		amountH: 0,
 	});
 	const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+	const isWide = useMedia("(min-width: 48rem)");
 
 	useEffect(() => {
 		const desktopWidthLights = 56;
-		const desktopHeightLights = 21;
+		const desktopHeightLights = isWide ? 21 : 10;
 
 		if (targetRef.current) {
 			setDimensions({
@@ -38,21 +40,27 @@ const LightCanvas: FC<LightCanvasProps> = ({ children }) => {
 	return (
 		<div ref={targetRef} className={styles.container}>
 			{children}
-			<div className={classNames(styles.lightContainer, styles.top)}>
-				{[...Array(lights.amountW).keys()].map((idx) => (
-					<div key={idx} className={styles.light}></div>
-				))}
-			</div>
+			{isWide && (
+				<div className={classNames(styles.lightContainer, styles.top)}>
+					{[...Array(lights.amountW).keys()].map((idx) => (
+						<div key={idx} className={styles.light}></div>
+					))}
+				</div>
+			)}
 			<div className={classNames(styles.lightContainer, styles.left)}>
 				{[...Array(lights.amountH).keys()].map((idx) => (
 					<div key={idx} className={styles.light}></div>
 				))}
 			</div>
-			<div className={classNames(styles.lightContainer, styles.bottom)}>
-				{[...Array(lights.amountW).keys()].map((idx) => (
-					<div key={idx} className={styles.light}></div>
-				))}
-			</div>
+			{isWide && (
+				<div
+					className={classNames(styles.lightContainer, styles.bottom)}
+				>
+					{[...Array(lights.amountW).keys()].map((idx) => (
+						<div key={idx} className={styles.light}></div>
+					))}
+				</div>
+			)}
 			<div className={classNames(styles.lightContainer, styles.right)}>
 				{[...Array(lights.amountH).keys()].map((idx) => (
 					<div key={idx} className={styles.light}></div>

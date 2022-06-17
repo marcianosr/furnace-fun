@@ -1,15 +1,22 @@
 .container {
 	border-radius: 10rem;
 	background-color: rgba(0, 0, 0, 0.5);
-	padding: 1.5rem;
 	font-family: "CCComic";
 	color: white;
 	transition: color 0.35s ease-out;
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	font-size: 1.5rem;
 	position: relative;
+	font-size: 1rem;
+	padding: 1rem;
+}
+
+@media screen and (min-width: 48rem) {
+	.container {
+		font-size: 1.5rem;
+		padding: 1.5rem;
+	}
 }
 
 .mug {

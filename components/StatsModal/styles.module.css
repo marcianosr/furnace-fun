@@ -1,31 +1,59 @@
 .statsModal {
 	position: absolute;
 	z-index: 1;
-	min-width: 700px;
-	max-width: 900px;
+
 	min-height: 400px;
 	background: transparent;
 	border: 0;
-	top: 4rem;
+	top: 1.5rem;
+}
+
+@media screen and (min-width: 48rem) {
+	.statsModal {
+		min-width: 700px;
+		max-width: 900px;
+		top: 4rem;
+	}
 }
 
 .statsModal h1 {
 	color: white;
 	margin-top: 1rem;
 	font-family: "Lithos Pro Black";
-	font-size: 4rem;
+	font-size: 3rem;
 	text-align: center;
 	letter-spacing: -7px;
 	color: blue;
-	text-shadow: -3px -3px 0 yellow, 3px -3px 0 yellow, -3px 3px 0 yellow,
-		3px 3px 0 yellow;
+	text-shadow: -2px -2px 0 yellow, 2px -2px 0 yellow, -2px 2px 0 yellow,
+		2px 2px 0 yellow;
+}
+
+@media screen and (min-width: 48rem) {
+	.statsModal h1 {
+		font-size: 4rem;
+	}
 }
 
 .statsModal ul {
 	display: flex;
+	flex-direction: column;
 	padding: 0;
-	gap: 1rem;
+	gap: 0.5rem;
 	line-height: 1;
+}
+
+.statsModal ul:last-child {
+	margin-top: 1rem;
+}
+
+@media screen and (min-width: 48rem) {
+	.statsModal ul {
+		font-size: 4rem;
+		flex-direction: row;
+		gap: 1rem;
+		margin: 0;
+		margin-bottom: 1rem;
+	}
 }
 
 .statsModal ul li {
@@ -35,5 +63,13 @@
 .text {
 	line-height: 1;
 	margin-top: 1rem;
-	font-size: 1.25rem;
+	font-size: 1rem;
+}
+
+@media screen and (min-width: 48rem) {
+	.text {
+		line-height: 1;
+		margin-top: 1rem;
+		font-size: 1.25rem;
+	}
 }
