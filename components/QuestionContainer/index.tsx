@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useLocalStorage } from "react-use";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import StatsModal from "../StatsModal";
 import { useCountdown } from "../../hooks/useCountdown";
 import Question from "../Question";
@@ -92,14 +92,13 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 			correctAnswer: isCorrectAnswer,
 		});
 
-		console.log("dataLayer:", (window as any).dataLayer);
-
 		setModal(true);
 
-		(window as any).dataLayer?.push({
-			event: "event-submit-question",
-			category: "Submit question",
-			stats: stats,
+		ReactGA.event({
+			category: "User interaction",
+			action: "Submit question",
+			label: "Submit question", // optional
+			value: stats, // optional, must be a number
 		});
 	};
 

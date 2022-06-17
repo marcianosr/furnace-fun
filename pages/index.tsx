@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import Script from "next/script";
 import React, { useEffect, useState } from "react";
 import LightCanvas from "../components/LightCanvas";
@@ -31,9 +31,9 @@ const Home: NextPage<Props> = () => {
 	const [questions, setQuestions] = useState([]);
 
 	useEffect(() => {
-		// ReactGA.initialize("G-ML3PGJYT1S", { debug: true });
-		// ReactGA.pageview(window.location.pathname + window.location.search);
-		// console.log("React ga");
+		ReactGA.initialize("G-GN6M9J5562");
+		ReactGA.send("pageview");
+		console.log("React ga");
 		const dev = process.env.NODE_ENV !== "production";
 		const apiUrl = dev
 			? "http://localhost:3000"
@@ -46,9 +46,9 @@ const Home: NextPage<Props> = () => {
 	}, []);
 	return (
 		<div className={styles.container}>
-			<Script
+			{/* <Script
 				strategy="lazyOnload"
-				src="https://www.googletagmanager.com/gtag/js?id=G-ML3PGJYT1S"
+				src="https://www.googletagmanager.com/gtag/js?id=G-GN6M9J5562"
 			/>
 
 			<Script id="analytics" strategy="lazyOnload">
@@ -58,8 +58,8 @@ const Home: NextPage<Props> = () => {
 					gtag('js', new Date());
 					gtag('config', 'G-ML3PGJYT1S')
 					`}
-			</Script>
-			<Script id="tagmanager" strategy="lazyOnload">{`
+			</Script> */}
+			{/* <Script id="tagmanager" strategy="lazyOnload">{`
 				(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -76,7 +76,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 						visibility: "hidden",
 					}}
 				></iframe>
-			</noscript>
+			</noscript> */}
 			<Head>
 				<title>Furnace Fun</title>
 				<meta
