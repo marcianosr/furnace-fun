@@ -50,7 +50,8 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 
 				<RoundContainer>
 					<span className={styles.text}>
-						Play the next question in: {hours}:{minutes}:{seconds}
+						Play the next question in: {Math.max(hours, 0)}:
+						{Math.max(minutes, 0)}:{Math.max(seconds, 0)}
 					</span>
 				</RoundContainer>
 				<ul>
