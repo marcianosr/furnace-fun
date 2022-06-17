@@ -97,8 +97,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		ReactGA.event({
 			category: "User interaction",
 			action: "Submit question",
-			label: "Submit question", // optional
-			value: stats, // optional, must be a number
+			label: JSON.stringify(stats), // optional
 		});
 	};
 
