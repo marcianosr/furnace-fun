@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useLocalStorage } from "react-use";
+import ReactGA from "react-ga";
 import StatsModal from "../StatsModal";
 import { useCountdown } from "../../hooks/useCountdown";
 import Question from "../Question";
@@ -92,6 +93,12 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		});
 
 		setModal(true);
+
+		ReactGA.event({
+			category: "Submit",
+			action: "Submitted question",
+			value: stats,
+		});
 	};
 
 	return (
