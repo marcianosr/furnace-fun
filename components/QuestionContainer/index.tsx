@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useId } from "react";
 import { useLocalStorage } from "react-use";
 import ReactGA from "react-ga4";
 import StatsModal from "../StatsModal";
@@ -28,6 +28,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 
 	// Refactor any later
 	const [stats, setStats] = useLocalStorage<any>("stats", {
+		id: useId(),
 		gamesPlayed: 0,
 		maxStreak: 0,
 		currentStreak: 0,
@@ -95,21 +96,9 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		setModal(true);
 
 		ReactGA.event({
-			category: "Stats: Max Streak",
-			action: "Submit question",
-			label: stats.maxStreak,
-		});
-
-		ReactGA.event({
-			category: "Stats: Current Streak",
-			action: "Submit question",
-			label: stats.currentStreak,
-		});
-
-		ReactGA.event({
-			category: "Stats: Games played",
-			action: "Submit question",
-			label: stats.currentStreak,
+			category: "Stats",
+			action: "Submitted question",
+			label: JSON.stringify(stats),
 		});
 	};
 
