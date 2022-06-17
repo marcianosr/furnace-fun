@@ -29,7 +29,9 @@
 }
 
 .top {
-	display: none;
+	top: 38px;
+	left: 10px;
+	flex-direction: column;
 }
 
 .left {
@@ -43,20 +45,18 @@
 }
 
 .bottom {
-	display: none;
+	top: 5px;
+	right: 10px;
+	flex-direction: column;
 }
 
-@media screen and (min-width: 48rem) {
-	.bottom {
-		top: 5px;
-		right: 10px;
-		flex-direction: column;
+@media screen and (max-width: 48rem) {
+	.top {
+		display: none;
 	}
 
-	.top {
-		top: 38px;
-		left: 10px;
-		flex-direction: column;
+	.bottom {
+		display: none;
 	}
 }
 
