@@ -94,10 +94,10 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 
 		setModal(true);
 
-		ReactGA.event({
-			category: "Submit",
-			action: "Submitted question",
-			value: stats,
+		(window as any).dataLayer?.push({
+			event: "event-submit-question",
+			category: "Submit question",
+			stats: stats,
 		});
 	};
 
