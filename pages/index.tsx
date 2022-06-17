@@ -29,7 +29,6 @@ const Home: NextPage<Props> = () => {
 	useEffect(() => {
 		ReactGA.initialize("G-GN6M9J5562");
 		ReactGA.send("pageview");
-		console.log("React ga");
 		const dev = process.env.NODE_ENV !== "production";
 		const apiUrl = dev
 			? "http://localhost:3000"
@@ -39,6 +38,7 @@ const Home: NextPage<Props> = () => {
 			return setQuestions(JSON.parse(data.questions));
 		});
 	}, []);
+
 	return (
 		<div className={styles.container}>
 			<Head>

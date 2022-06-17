@@ -29,9 +29,7 @@
 }
 
 .top {
-	top: 38px;
-	left: 10px;
-	flex-direction: column;
+	display: none;
 }
 
 .left {
@@ -45,9 +43,21 @@
 }
 
 .bottom {
-	top: 5px;
-	right: 10px;
-	flex-direction: column;
+	display: none;
+}
+
+@media screen and (min-width: 48rem) {
+	.bottom {
+		top: 5px;
+		right: 10px;
+		flex-direction: column;
+	}
+
+	.top {
+		top: 38px;
+		left: 10px;
+		flex-direction: column;
+	}
 }
 
 .light {
