@@ -18,12 +18,13 @@
 
 .statsModal h1 {
 	color: white;
-	margin-top: 1rem;
 	font-family: "Lithos Pro Black";
 	font-size: 3rem;
 	text-align: center;
 	letter-spacing: -7px;
 	color: blue;
+
+	margin-top: 0.5rem;
 	text-shadow: -2px -2px 0 yellow, 2px -2px 0 yellow, -2px 2px 0 yellow,
 		2px 2px 0 yellow;
 }
@@ -40,6 +41,7 @@
 	padding: 0;
 	gap: 0.5rem;
 	line-height: 1;
+	margin: 0;
 }
 
 .statsModal ul:last-child {
@@ -52,6 +54,7 @@
 		flex-direction: row;
 		gap: 1rem;
 		margin: 0;
+		margin-top: 1rem;
 		margin-bottom: 1rem;
 	}
 }

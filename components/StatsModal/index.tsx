@@ -62,6 +62,16 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 					</RoundContainer>
 					<RoundContainer>
 						<a
+							href="https://forms.gle/vgaWQnhYm9M5jVNp6"
+							target={"_blank"}
+							rel="noreferrer"
+							className={styles.text}
+						>
+							Send your idea's
+						</a>
+					</RoundContainer>
+					<RoundContainer>
+						<a
 							target={"_blank"}
 							rel="noreferrer"
 							className={styles.text}
