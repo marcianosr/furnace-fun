@@ -67,7 +67,7 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 							rel="noreferrer"
 							className={styles.text}
 						>
-							Send your idea's
+							Send your ideas
 						</a>
 					</RoundContainer>
 					<RoundContainer>
