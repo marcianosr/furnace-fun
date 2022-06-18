@@ -17,7 +17,7 @@ export type QuestionType = {
 };
 
 const preTextQuestion = [
-	"Here is your first question:",
+	"Here is your first question for today:",
 	"Here is ther second question:",
 	"Here is your last question for today!",
 ];
