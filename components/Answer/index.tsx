@@ -100,7 +100,7 @@ const Answer: FC<AnswerProps> = ({
 						})}
 					>
 						{answerByLetter.map((letter, idx) => (
-							<span>{letter}</span>
+							<span key={idx}>{letter}</span>
 						))}
 					</p>
 					{/* <p className={styles.answerText}></p> */}
