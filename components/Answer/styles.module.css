@@ -1,3 +1,11 @@
 .answer {
 	cursor: pointer;
 }
+
+div input:checked + .correct {
+	color: green;
+}
+
+div input:checked + .incorrect {
+	color: red;
+}

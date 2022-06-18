@@ -12,6 +12,7 @@ export type QuestionProps = {
 	preTextQuestion?: string;
 	isClickedAnswer: number | null;
 	setIsClickedAnswer: (idx: number) => void;
+	isSubmitted: boolean;
 };
 
 const Question: FC<QuestionProps> = ({
@@ -22,6 +23,7 @@ const Question: FC<QuestionProps> = ({
 	preTextQuestion,
 	isClickedAnswer,
 	setIsClickedAnswer,
+	isSubmitted,
 }) => {
 	return (
 		<>
@@ -49,6 +51,7 @@ const Question: FC<QuestionProps> = ({
 						idx={idx}
 						isClickedAnswer={isClickedAnswer}
 						setIsClickedAnswer={setIsClickedAnswer}
+						isSubmitted={isSubmitted}
 					/>
 				))}
 				<button

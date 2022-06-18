@@ -1,4 +1,6 @@
+import classNames from "classnames";
 import React, { FC, useState } from "react";
+import { checkAnswer } from "../QuestionContainer";
 import SpeechBubble from "../SpeechBubble";
 // import { QuestionType } from "./QuestionContainer";
 import styles from "./styles.module.css";
@@ -10,6 +12,7 @@ export type AnswerProps = {
 	idx: number;
 	isClickedAnswer: number | null | undefined;
 	setIsClickedAnswer: (idx: number) => void;
+	isSubmitted: boolean;
 };
 
 enum CHARACTER_MUGS {
@@ -64,7 +67,11 @@ const Answer: FC<AnswerProps> = ({
 	idx,
 	isClickedAnswer,
 	setIsClickedAnswer,
+	isSubmitted,
 }) => {
+	const answerByLetter = answer.split("");
+	const isCorrectAnswer = checkAnswer(answer, question.correctAnswer);
+
 	return (
 		<li key={question}>
 			<label
@@ -82,11 +89,21 @@ const Answer: FC<AnswerProps> = ({
 					<input
 						type="radio"
 						id={answer}
-						name="drone"
+						name="answer"
 						value={answer}
 						onClick={() => setAnswer(answer)}
 					/>
-					<p className={styles.answerText}>{answer}</p>
+					<p
+						className={classNames(styles.answerText, {
+							[styles.correct]: isSubmitted && isCorrectAnswer,
+							[styles.incorrect]: isSubmitted && !isCorrectAnswer,
+						})}
+					>
+						{answerByLetter.map((letter, idx) => (
+							<span>{letter}</span>
+						))}
+					</p>
+					{/* <p className={styles.answerText}></p> */}
 				</SpeechBubble>
 			</label>
 		</li>

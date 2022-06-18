@@ -27,6 +27,9 @@ const preTextQuestion = [
 const getRandomQuestion = (questions: any) =>
 	questions[Math.floor(Math.random() * questions.length)];
 
+export const checkAnswer = (givenAnswer: string, correctAnswer: string) =>
+	givenAnswer === correctAnswer;
+
 const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	const [todaysQuestions] = useState([
 		...Array.from({ length: QUESTIONS_PER_DAY }).map((_) =>
@@ -40,6 +43,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 
 	const [answer, setAnswer] = useState("");
 	const [isClickedAnswer, setIsClickedAnswer] = useState<number | null>();
+	const [isSubmitted, setSubmitted] = useState(false);
 
 	const [showInstructions, setShowInstructions] = useState(false);
 
@@ -58,9 +62,6 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	const [_, hours, minutes, seconds] = useCountdown(stats.date || date);
 
 	const [modal, setModal] = useState(false);
-
-	const checkAnswer = (givenAnswer: string) =>
-		givenAnswer === currentQuestion?.correctAnswer;
 
 	useEffect(() => {
 		if (stats.date) setModal(true);
@@ -83,6 +84,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		setCurrentQuestion(todaysQuestions[questionIndex]);
 		setAnswer("");
 		setIsClickedAnswer(null);
+		setSubmitted(false);
 
 		if (questionIndex === QUESTIONS_PER_DAY) {
 			setModal(true);
@@ -108,28 +110,34 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 			setTimeout(() => setShowInstructions(false), 5000);
 			return;
 		}
-		setQuestionIndex(questionIndex + 1);
+		const isCorrectAnswer = checkAnswer(
+			answer,
+			currentQuestion.correctAnswer
+		);
 
-		const isCorrectAnswer = checkAnswer(answer);
+		setSubmitted(true);
+		setTimeout(() => {
+			setQuestionIndex(questionIndex + 1);
 
-		setStats({
-			...stats,
-			gamesPlayed: stats?.gamesPlayed + 1,
-			currentStreak: isCorrectAnswer ? stats.currentStreak + 1 : 0,
-			maxStreak: isCorrectAnswer
-				? stats.currentStreak >= stats.maxStreak
-					? stats.maxStreak + 1
-					: stats.maxStreak
-				: stats.maxStreak,
+			setStats({
+				...stats,
+				gamesPlayed: stats?.gamesPlayed + 1,
+				currentStreak: isCorrectAnswer ? stats.currentStreak + 1 : 0,
+				maxStreak: isCorrectAnswer
+					? stats.currentStreak >= stats.maxStreak
+						? stats.maxStreak + 1
+						: stats.maxStreak
+					: stats.maxStreak,
 
-			correctAnswer: isCorrectAnswer,
-		});
+				correctAnswer: isCorrectAnswer,
+			});
 
-		ReactGA.event({
-			category: "Stats",
-			action: "Submitted question",
-			label: JSON.stringify(stats),
-		});
+			ReactGA.event({
+				category: "Stats",
+				action: "Submitted question",
+				label: JSON.stringify(stats),
+			});
+		}, 2000);
 	};
 
 	return (
@@ -145,6 +153,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 								text="Please answer the question before submitting"
 								isClickedAnswer={isClickedAnswer || null}
 								setIsClickedAnswer={setIsClickedAnswer}
+								isSubmitted={isSubmitted}
 							/>
 						) : (
 							<Question
@@ -154,6 +163,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 								submitAnswer={submitAnswer}
 								isClickedAnswer={isClickedAnswer || null}
 								setIsClickedAnswer={setIsClickedAnswer}
+								isSubmitted={isSubmitted}
 							/>
 						)}
 					</>
