@@ -16,6 +16,8 @@ export type QuestionType = {
 	correctAnswer: string;
 };
 
+const QUESTIONS_PER_DAY = 3;
+
 const preTextQuestion = [
 	"Here is your first question for today:",
 	"Here is ther second question:",
@@ -26,15 +28,19 @@ const getRandomQuestion = (questions: any) =>
 	questions[Math.floor(Math.random() * questions.length)];
 
 const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
-	const [todaysQuestions, setTodaysQuestions] = useState([
+	const [todaysQuestions] = useState([
 		getRandomQuestion(questions),
 		getRandomQuestion(questions),
 		getRandomQuestion(questions),
 	]);
-	const [currentQuestion, setCurrentQuestion] = useState(todaysQuestions[0]);
 	const [questionIndex, setQuestionIndex] = useState(0);
+	const [currentQuestion, setCurrentQuestion] = useState(
+		todaysQuestions[questionIndex]
+	);
 
 	const [answer, setAnswer] = useState("");
+	const [isClickedAnswer, setIsClickedAnswer] = useState<number | null>();
+
 	const [showInstructions, setShowInstructions] = useState(false);
 
 	const [date, setDate] = useState<Date>();
@@ -71,14 +77,25 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		}
 	}, []);
 
+	useEffect(() => {
+		setCurrentQuestion(todaysQuestions[questionIndex]);
+		setAnswer("");
+		setIsClickedAnswer(null);
+
+		if (questionIndex === QUESTIONS_PER_DAY) setModal(true);
+	}, [questionIndex]);
+
 	const submitAnswer = () => {
 		if (!answer) {
 			console.log(
 				"You didn't answer the question, watchout before I throw you in the lava bath"
 			);
 			setShowInstructions(true);
+			setTimeout(() => setShowInstructions(false), 5000);
 			return;
 		}
+		setQuestionIndex(questionIndex + 1);
+
 		const TOMORROW_IN_MS = 1 * 24 * 60 * 60 * 1000;
 		const NOW_IN_MS = new Date().getTime();
 		const tomorrow = NOW_IN_MS + TOMORROW_IN_MS;
@@ -101,19 +118,11 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		// 	correctAnswer: isCorrectAnswer,
 		// });
 
-		const questionsLeft = todaysQuestions.slice(questionIndex);
-		setQuestionIndex(questionIndex + 1);
-
 		ReactGA.event({
 			category: "Stats",
 			action: "Submitted question",
 			label: JSON.stringify(stats),
 		});
-
-		if (questionsLeft.length !== 0)
-			return setCurrentQuestion(todaysQuestions[questionIndex]);
-
-		setModal(true);
 	};
 
 	return (
@@ -127,6 +136,8 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 								setAnswer={setAnswer}
 								submitAnswer={submitAnswer}
 								text="Please answer the question before submitting"
+								isClickedAnswer={isClickedAnswer || null}
+								setIsClickedAnswer={setIsClickedAnswer}
 							/>
 						) : (
 							<Question
@@ -134,6 +145,8 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 								question={currentQuestion}
 								setAnswer={setAnswer}
 								submitAnswer={submitAnswer}
+								isClickedAnswer={isClickedAnswer || null}
+								setIsClickedAnswer={setIsClickedAnswer}
 							/>
 						)}
 					</>

@@ -10,6 +10,8 @@ export type QuestionProps = {
 	submitAnswer: () => void;
 	text?: string;
 	preTextQuestion?: string;
+	isClickedAnswer: number | null;
+	setIsClickedAnswer: (idx: number) => void;
 };
 
 const Question: FC<QuestionProps> = ({
@@ -18,9 +20,9 @@ const Question: FC<QuestionProps> = ({
 	submitAnswer,
 	text,
 	preTextQuestion,
+	isClickedAnswer,
+	setIsClickedAnswer,
 }) => {
-	const [isClickedAnswer, setIsClickedAnswer] = useState<number | null>();
-
 	return (
 		<>
 			<SpeechBubble
