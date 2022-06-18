@@ -88,16 +88,6 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 
 		if (questionIndex === QUESTIONS_PER_DAY) {
 			setModal(true);
-			const TOMORROW_IN_MS = 1 * 24 * 60 * 60 * 1000;
-			const NOW_IN_MS = new Date().getTime();
-			const tomorrow = NOW_IN_MS + TOMORROW_IN_MS;
-			const stringTomorrowDate = new Date(tomorrow);
-			setDate(stringTomorrowDate);
-
-			setStats({
-				...stats,
-				date: stringTomorrowDate,
-			});
 		}
 	}, [questionIndex]);
 
@@ -119,6 +109,12 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		setTimeout(() => {
 			setQuestionIndex(questionIndex + 1);
 
+			const TOMORROW_IN_MS = 1 * 24 * 60 * 60 * 1000;
+			const NOW_IN_MS = new Date().getTime();
+			const tomorrow = NOW_IN_MS + TOMORROW_IN_MS;
+			const stringTomorrowDate = new Date(tomorrow);
+			setDate(stringTomorrowDate);
+
 			setStats({
 				...stats,
 				gamesPlayed: stats?.gamesPlayed + 1,
@@ -130,6 +126,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 					: stats.maxStreak,
 
 				correctAnswer: isCorrectAnswer,
+				date: stringTomorrowDate,
 			});
 
 			ReactGA.event({
