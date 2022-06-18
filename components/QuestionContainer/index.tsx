@@ -29,10 +29,11 @@ const getRandomQuestion = (questions: any) =>
 
 const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	const [todaysQuestions] = useState([
-		getRandomQuestion(questions),
-		getRandomQuestion(questions),
-		getRandomQuestion(questions),
+		...Array.from({ length: QUESTIONS_PER_DAY }).map((_) =>
+			getRandomQuestion(questions)
+		),
 	]);
+
 	const [questionIndex, setQuestionIndex] = useState(0);
 	const [currentQuestion, setCurrentQuestion] = useState(
 		todaysQuestions[questionIndex]
