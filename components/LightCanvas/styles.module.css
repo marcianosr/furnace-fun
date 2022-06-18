@@ -17,13 +17,13 @@
 @media screen and (min-width: 48rem) {
 	.container {
 		padding: 2.75rem;
-		height: 790px;
+		height: 770px;
 	}
 }
 
 .lightContainer {
 	position: absolute;
-	gap: 0.45rem;
+	gap: 0.52rem;
 	display: flex;
 }
 

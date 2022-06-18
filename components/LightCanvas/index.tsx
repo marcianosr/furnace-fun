@@ -15,8 +15,8 @@ const LightCanvas: FC<LightCanvasProps> = ({ children }) => {
 	const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
 	useEffect(() => {
-		const desktopWidthLights = 56;
-		const desktopHeightLights = 21;
+		const desktopWidthLights = 47;
+		const desktopHeightLights = 26;
 
 		if (targetRef.current) {
 			setDimensions({
