@@ -20,7 +20,7 @@ const QUESTIONS_PER_DAY = 3;
 
 const preTextQuestion = [
 	"Here is your first question for today:",
-	"Here is ther second question:",
+	"Here is the second question:",
 	"Here is your last question for today!",
 ];
 
@@ -33,8 +33,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 			getRandomQuestion(questions)
 		),
 	]);
-
-	const [questionIndex, setQuestionIndex] = useState(0);
+	const [questionIndex, setQuestionIndex] = useLocalStorage<any>("qindex", 0);
 	const [currentQuestion, setCurrentQuestion] = useState(
 		todaysQuestions[questionIndex]
 	);
@@ -47,6 +46,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	const [date, setDate] = useState<Date>();
 
 	// Refactor any later
+
 	const [stats, setStats] = useLocalStorage<any>("stats", {
 		id: useId(),
 		gamesPlayed: 0,
@@ -75,6 +75,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 				...stats,
 				date: null,
 			});
+			setQuestionIndex(0);
 		}
 	}, []);
 
@@ -83,7 +84,19 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		setAnswer("");
 		setIsClickedAnswer(null);
 
-		if (questionIndex === QUESTIONS_PER_DAY) setModal(true);
+		if (questionIndex === QUESTIONS_PER_DAY) {
+			setModal(true);
+			const TOMORROW_IN_MS = 1 * 24 * 60 * 60 * 1000;
+			const NOW_IN_MS = new Date().getTime();
+			const tomorrow = NOW_IN_MS + TOMORROW_IN_MS;
+			const stringTomorrowDate = new Date(tomorrow);
+			setDate(stringTomorrowDate);
+
+			setStats({
+				...stats,
+				date: stringTomorrowDate,
+			});
+		}
 	}, [questionIndex]);
 
 	const submitAnswer = () => {
@@ -97,27 +110,20 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		}
 		setQuestionIndex(questionIndex + 1);
 
-		const TOMORROW_IN_MS = 1 * 24 * 60 * 60 * 1000;
-		const NOW_IN_MS = new Date().getTime();
-		const tomorrow = NOW_IN_MS + TOMORROW_IN_MS;
-		const stringTomorrowDate = new Date(tomorrow);
-		setDate(stringTomorrowDate);
-
 		const isCorrectAnswer = checkAnswer(answer);
 
-		// setStats({
-		// 	...stats,
-		// 	gamesPlayed: stats?.gamesPlayed + 1,
-		// 	currentStreak: isCorrectAnswer ? stats.currentStreak + 1 : 0,
-		// 	maxStreak: isCorrectAnswer
-		// 		? stats.currentStreak >= stats.maxStreak
-		// 			? stats.maxStreak + 1
-		// 			: stats.maxStreak
-		// 		: stats.maxStreak,
+		setStats({
+			...stats,
+			gamesPlayed: stats?.gamesPlayed + 1,
+			currentStreak: isCorrectAnswer ? stats.currentStreak + 1 : 0,
+			maxStreak: isCorrectAnswer
+				? stats.currentStreak >= stats.maxStreak
+					? stats.maxStreak + 1
+					: stats.maxStreak
+				: stats.maxStreak,
 
-		// 	date: stringTomorrowDate,
-		// 	correctAnswer: isCorrectAnswer,
-		// });
+			correctAnswer: isCorrectAnswer,
+		});
 
 		ReactGA.event({
 			category: "Stats",

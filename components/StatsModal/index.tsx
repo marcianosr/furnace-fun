@@ -50,7 +50,7 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 
 				<SpeechBubble>
 					<span className={styles.text}>
-						Play the next question in: {Math.max(hours, 0)}:
+						Play the next three questions in: {Math.max(hours, 0)}:
 						{Math.max(minutes, 0)}:{Math.max(seconds, 0)}
 					</span>
 				</SpeechBubble>
