@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import ReactGA from "react-ga4";
-import Script from "next/script";
 import React, { useEffect, useState } from "react";
 import LightCanvas from "../components/LightCanvas";
 import QuestionContainer from "../components/QuestionContainer";

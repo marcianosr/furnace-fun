@@ -9,6 +9,7 @@ export type QuestionProps = {
 	setAnswer: (answer: string) => void;
 	submitAnswer: () => void;
 	text?: string;
+	preTextQuestion?: string;
 };
 
 const Question: FC<QuestionProps> = ({
@@ -16,6 +17,7 @@ const Question: FC<QuestionProps> = ({
 	setAnswer,
 	submitAnswer,
 	text,
+	preTextQuestion,
 }) => {
 	const [isClickedAnswer, setIsClickedAnswer] = useState<number | null>();
 
@@ -27,7 +29,13 @@ const Question: FC<QuestionProps> = ({
 				height={170}
 				largeMug
 			>
-				{text ? <p>{text}</p> : <p>{question?.question}</p>}
+				{text ? (
+					<p>{text}</p>
+				) : (
+					<p>
+						{preTextQuestion} {question?.question}
+					</p>
+				)}
 			</SpeechBubble>
 			<ul className={styles.answerContainer}>
 				{question?.answers?.map((answer: any, idx: number) => (

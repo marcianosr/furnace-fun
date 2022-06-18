@@ -16,11 +16,24 @@ export type QuestionType = {
 	correctAnswer: string;
 };
 
-const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
-	const randomQuestion =
-		questions[Math.floor(Math.random() * questions.length)];
+const preTextQuestion = [
+	"Here is your first question:",
+	"Here is ther second question:",
+	"Here is your last question for today!",
+];
 
-	const [question, setQuestion] = useState<QuestionType>();
+const getRandomQuestion = (questions: any) =>
+	questions[Math.floor(Math.random() * questions.length)];
+
+const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
+	const [todaysQuestions, setTodaysQuestions] = useState([
+		getRandomQuestion(questions),
+		getRandomQuestion(questions),
+		getRandomQuestion(questions),
+	]);
+	const [currentQuestion, setCurrentQuestion] = useState(todaysQuestions[0]);
+	const [questionIndex, setQuestionIndex] = useState(0);
+
 	const [answer, setAnswer] = useState("");
 	const [showInstructions, setShowInstructions] = useState(false);
 
@@ -39,13 +52,8 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 
 	const [modal, setModal] = useState(false);
 
-	const checkAnswer = (givenAnswer: string) => {
-		return givenAnswer === question?.correctAnswer;
-	};
-
-	useEffect(() => {
-		setQuestion(randomQuestion);
-	}, []);
+	const checkAnswer = (givenAnswer: string) =>
+		givenAnswer === currentQuestion?.correctAnswer;
 
 	useEffect(() => {
 		if (stats.date) setModal(true);
@@ -79,27 +87,33 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 
 		const isCorrectAnswer = checkAnswer(answer);
 
-		setStats({
-			...stats,
-			gamesPlayed: stats?.gamesPlayed + 1,
-			currentStreak: isCorrectAnswer ? stats.currentStreak + 1 : 0,
-			maxStreak: isCorrectAnswer
-				? stats.currentStreak >= stats.maxStreak
-					? stats.maxStreak + 1
-					: stats.maxStreak
-				: stats.maxStreak,
+		// setStats({
+		// 	...stats,
+		// 	gamesPlayed: stats?.gamesPlayed + 1,
+		// 	currentStreak: isCorrectAnswer ? stats.currentStreak + 1 : 0,
+		// 	maxStreak: isCorrectAnswer
+		// 		? stats.currentStreak >= stats.maxStreak
+		// 			? stats.maxStreak + 1
+		// 			: stats.maxStreak
+		// 		: stats.maxStreak,
 
-			date: stringTomorrowDate,
-			correctAnswer: isCorrectAnswer,
-		});
+		// 	date: stringTomorrowDate,
+		// 	correctAnswer: isCorrectAnswer,
+		// });
 
-		setModal(true);
+		const questionsLeft = todaysQuestions.slice(questionIndex);
+		setQuestionIndex(questionIndex + 1);
 
 		ReactGA.event({
 			category: "Stats",
 			action: "Submitted question",
 			label: JSON.stringify(stats),
 		});
+
+		if (questionsLeft.length !== 0)
+			return setCurrentQuestion(todaysQuestions[questionIndex]);
+
+		setModal(true);
 	};
 
 	return (
@@ -109,14 +123,15 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 					<>
 						{showInstructions ? (
 							<Question
-								question={question}
+								question={currentQuestion}
 								setAnswer={setAnswer}
 								submitAnswer={submitAnswer}
 								text="Please answer the question before submitting"
 							/>
 						) : (
 							<Question
-								question={question}
+								preTextQuestion={preTextQuestion[questionIndex]}
+								question={currentQuestion}
 								setAnswer={setAnswer}
 								submitAnswer={submitAnswer}
 							/>
