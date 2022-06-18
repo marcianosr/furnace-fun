@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import styles from "./styles.module.css";
 import classnames from "classnames";
 
-type RoundContainerProps = {
+type SpeechBubbleProps = {
 	children: React.ReactNode;
 	mug?: string;
 	width?: number;
@@ -11,7 +11,7 @@ type RoundContainerProps = {
 	isActive?: boolean;
 };
 
-const RoundContainer: FC<RoundContainerProps> = ({
+const SpeechBubble: FC<SpeechBubbleProps> = ({
 	mug,
 	children,
 	width = 90,
@@ -37,4 +37,4 @@ const RoundContainer: FC<RoundContainerProps> = ({
 	);
 };
 
-export default RoundContainer;
+export default SpeechBubble;

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useLocalStorage } from "react-use";
 import { useCountdown } from "../../hooks/useCountdown";
-import RoundContainer from "../RoundContainer";
+import SpeechBubble from "../SpeechBubble";
 import styles from "./styles.module.css";
 
 export type StatsModalProps = {
@@ -16,7 +16,7 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 	return (
 		<dialog open={isOpen} className={styles.statsModal}>
 			<section>
-				<RoundContainer
+				<SpeechBubble
 					mug={"gruntilda.gif"}
 					width={170}
 					height={170}
@@ -33,34 +33,34 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 							have it wrong again all day long!
 						</p>
 					)}
-				</RoundContainer>
+				</SpeechBubble>
 				<h1>Stats</h1>
 
 				<ul>
-					<RoundContainer>
+					<SpeechBubble>
 						<li>Played: {stats.gamesPlayed}</li>
-					</RoundContainer>
-					<RoundContainer>
+					</SpeechBubble>
+					<SpeechBubble>
 						<li>Max. streak: {stats.maxStreak}</li>
-					</RoundContainer>
-					<RoundContainer>
+					</SpeechBubble>
+					<SpeechBubble>
 						<li>Current streak: {stats.currentStreak}</li>
-					</RoundContainer>
+					</SpeechBubble>
 				</ul>
 
-				<RoundContainer>
+				<SpeechBubble>
 					<span className={styles.text}>
 						Play the next question in: {Math.max(hours, 0)}:
 						{Math.max(minutes, 0)}:{Math.max(seconds, 0)}
 					</span>
-				</RoundContainer>
+				</SpeechBubble>
 				<ul>
-					<RoundContainer>
+					<SpeechBubble>
 						<li className={styles.text}>
 							Have some feedback or problems playing?
 						</li>
-					</RoundContainer>
-					<RoundContainer>
+					</SpeechBubble>
+					<SpeechBubble>
 						<a
 							href="https://forms.gle/vgaWQnhYm9M5jVNp6"
 							target={"_blank"}
@@ -69,8 +69,8 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 						>
 							Send your ideas
 						</a>
-					</RoundContainer>
-					<RoundContainer>
+					</SpeechBubble>
+					<SpeechBubble>
 						<a
 							target={"_blank"}
 							rel="noreferrer"
@@ -79,8 +79,8 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 						>
 							Email me
 						</a>
-					</RoundContainer>
-					<RoundContainer>
+					</SpeechBubble>
+					<SpeechBubble>
 						<a
 							target={"_blank"}
 							rel="noreferrer"
@@ -89,7 +89,7 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 						>
 							Send me a tweet
 						</a>
-					</RoundContainer>
+					</SpeechBubble>
 				</ul>
 			</section>
 		</dialog>

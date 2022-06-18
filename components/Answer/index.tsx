@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import RoundContainer from "../RoundContainer";
+import SpeechBubble from "../SpeechBubble";
 // import { QuestionType } from "./QuestionContainer";
 import styles from "./styles.module.css";
 
@@ -75,7 +75,7 @@ const Answer: FC<AnswerProps> = ({
 				}}
 				htmlFor={answer}
 			>
-				<RoundContainer
+				<SpeechBubble
 					mug={getRandomMug[idx]}
 					isActive={idx === isClickedAnswer}
 				>
@@ -87,7 +87,7 @@ const Answer: FC<AnswerProps> = ({
 						onClick={() => setAnswer(answer)}
 					/>
 					<p className={styles.answerText}>{answer}</p>
-				</RoundContainer>
+				</SpeechBubble>
 			</label>
 		</li>
 	);

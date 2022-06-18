@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import Answer from "../Answer";
 import { QuestionType } from "../QuestionContainer";
-import RoundContainer from "../RoundContainer";
+import SpeechBubble from "../SpeechBubble";
 import styles from "./styles.module.css";
 
 export type QuestionProps = {
@@ -21,14 +21,14 @@ const Question: FC<QuestionProps> = ({
 
 	return (
 		<>
-			<RoundContainer
+			<SpeechBubble
 				mug={"gruntilda.gif"}
 				width={170}
 				height={170}
 				largeMug
 			>
 				{text ? <p>{text}</p> : <p>{question?.question}</p>}
-			</RoundContainer>
+			</SpeechBubble>
 			<ul className={styles.answerContainer}>
 				{question?.answers?.map((answer: any, idx: number) => (
 					<Answer

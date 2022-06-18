@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import LightCanvas from "../components/LightCanvas";
 import QuestionContainer from "../components/QuestionContainer";
 import styles from "../styles/Home.module.css";
-import RoundContainer from "../components/RoundContainer";
+import SpeechBubble from "../components/SpeechBubble";
 
 type Props = {};
 
@@ -54,7 +54,7 @@ const Home: NextPage<Props> = () => {
 				<LightCanvas>
 					<section className={styles.poster}>
 						{questions.length === 0 && (
-							<RoundContainer>Loading...</RoundContainer>
+							<SpeechBubble>Loading...</SpeechBubble>
 						)}
 						{questions.length > 0 && (
 							<QuestionContainer questions={questions} />
