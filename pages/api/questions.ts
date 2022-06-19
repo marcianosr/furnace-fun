@@ -58,23 +58,23 @@ export default async function handler(
 			?.split("O -")[1]
 			.trim()
 	);
-	const BKQuestions = questions.map((question, idx) => {
-		return {
-			id: `BK-${idx}`,
-			question: `${question}?`,
-			answers: answers[idx]?.map((answer) =>
-				answer
-					.split(/X -|O -/)
-					.filter((a) => a)[0]
-					.trim()
-			),
-			correctAnswer: correctAnswer[idx + 1],
-			game: "Banjo-Kazooie",
-			questionType: "general",
-		};
-	});
-
-	// console.log(BKQuestions);
+	const BKQuestions = questions
+		.map((question, idx) => {
+			return {
+				id: `BK-${idx}`,
+				question: `${question}?`,
+				answers: answers[idx]?.map((answer) =>
+					answer
+						.split(/X -|O -/)
+						.filter((a) => a)[0]
+						.trim()
+				),
+				correctAnswer: correctAnswer[idx + 1],
+				game: "Banjo-Kazooie",
+				questionType: "general",
+			};
+		})
+		.filter((question) => question.id !== "BK-133");
 
 	// TODO: Banjo Tooie
 

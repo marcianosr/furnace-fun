@@ -36,6 +36,8 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 			getRandomQuestion(questions)
 		),
 	]);
+
+	console.log(questions);
 	const [questionIndex, setQuestionIndex] = useLocalStorage<any>("qindex", 0);
 	const [currentQuestion, setCurrentQuestion] = useState(
 		todaysQuestions[questionIndex]
@@ -68,7 +70,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	}, []);
 
 	useEffect(() => {
-		const expired = hours + minutes + seconds <= 0;
+		const expired = hours + minutes + seconds <= 0 || isNaN(seconds);
 
 		if (expired) {
 			setModal(false);
