@@ -25,7 +25,7 @@ enum CHARACTER_MUGS {
 	DILBERTA = "Dilberta_Blinking.gif",
 	GOBI = "Gobi_Blinking.webp",
 	ICEWATER = "IceWater_Blinking.gif",
-	KAZOOIE = "Kazooie_Icon.webp",
+	KAZOOIE = "Kazooie_icon.webp",
 	KLUNGO = "Klungo_Blinking.gif",
 	MINGY = "Mingy_Jongo_Blinking.webp",
 	MUMBO = "Mumbo_Blinking.webp",
