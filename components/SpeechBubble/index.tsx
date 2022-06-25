@@ -9,6 +9,7 @@ type SpeechBubbleProps = {
 	height?: number;
 	largeMug?: boolean;
 	isActive?: boolean;
+	smallText?: boolean;
 };
 
 const SpeechBubble: FC<SpeechBubbleProps> = ({
@@ -18,6 +19,7 @@ const SpeechBubble: FC<SpeechBubbleProps> = ({
 	height = 90,
 	largeMug = false,
 	isActive = false,
+	smallText = false,
 }) => {
 	return (
 		<div className={styles.container}>
@@ -32,7 +34,13 @@ const SpeechBubble: FC<SpeechBubbleProps> = ({
 					height={height}
 				/>
 			)}
-			{children}
+			<span
+				className={classnames({
+					[styles.smallText]: smallText,
+				})}
+			>
+				{children}
+			</span>
 		</div>
 	);
 };

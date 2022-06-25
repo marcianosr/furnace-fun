@@ -1,22 +1,54 @@
 .statsModal {
 	position: absolute;
 	z-index: 1;
-
 	min-height: 400px;
 	background: transparent;
 	border: 0;
-	top: 1.5rem;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	margin-top: -4rem;
 }
 
 @media screen and (min-width: 48rem) {
 	.statsModal {
 		min-width: 700px;
 		max-width: 900px;
-		top: 4rem;
 	}
 }
 
-.statsModal h1 {
+.score,
+.nextGame,
+.social {
+	display: flex;
+	gap: 1rem;
+	flex-direction: column;
+}
+
+.statsContainer {
+	margin-top: 1rem;
+}
+
+@media screen and (min-width: 48rem) {
+	.statsContainer {
+		margin-top: 4rem;
+	}
+
+	.bubbleContainer {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		flex-direction: column;
+	}
+
+	.score,
+	.nextGame,
+	.social {
+		flex-direction: row;
+	}
+}
+
+.title {
 	color: white;
 	font-family: "Lithos Pro Black";
 	font-size: 3rem;
@@ -24,55 +56,12 @@
 	letter-spacing: -7px;
 	color: blue;
 
-	margin-top: 0.5rem;
 	text-shadow: -2px -2px 0 yellow, 2px -2px 0 yellow, -2px 2px 0 yellow,
 		2px 2px 0 yellow;
 }
 
 @media screen and (min-width: 48rem) {
-	.statsModal h1 {
+	.title {
 		font-size: 4rem;
-	}
-}
-
-.statsModal ul {
-	display: flex;
-	flex-direction: column;
-	padding: 0;
-	gap: 0.5rem;
-	line-height: 1;
-	margin: 0;
-}
-
-.statsModal ul:last-child {
-	margin-top: 1rem;
-}
-
-@media screen and (min-width: 48rem) {
-	.statsModal ul {
-		font-size: 4rem;
-		flex-direction: row;
-		gap: 1rem;
-		margin: 0;
-		margin-top: 1rem;
-		margin-bottom: 1rem;
-	}
-}
-
-.statsModal ul li {
-	margin-top: 1rem;
-}
-
-.text {
-	line-height: 1;
-	margin-top: 1rem;
-	font-size: 1rem;
-}
-
-@media screen and (min-width: 48rem) {
-	.text {
-		line-height: 1;
-		margin-top: 1rem;
-		font-size: 1.25rem;
 	}
 }

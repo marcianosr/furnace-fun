@@ -34,63 +34,66 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 						</p>
 					)}
 				</SpeechBubble>
-				<h1>Stats</h1>
+				<section className={styles.statsContainer}>
+					<h1 className={styles.title}>Stats</h1>
 
-				<ul>
-					<SpeechBubble>
-						<li>Total questions answered: {stats.gamesPlayed}</li>
-					</SpeechBubble>
-					<SpeechBubble>
-						<li>Max. streak: {stats.maxStreak}</li>
-					</SpeechBubble>
-					<SpeechBubble>
-						<li>Current streak: {stats.currentStreak}</li>
-					</SpeechBubble>
-				</ul>
+					<section className={styles.bubbleContainer}>
+						<div className={styles.score}>
+							<SpeechBubble smallText={true}>
+								Total questions answered: {stats.gamesPlayed}
+							</SpeechBubble>
+							<SpeechBubble smallText={true}>
+								Max. streak: {stats.maxStreak}
+							</SpeechBubble>
+							<SpeechBubble smallText={true}>
+								Current streak: {stats.currentStreak}
+							</SpeechBubble>
+						</div>
+						<div className={styles.nextGame}>
+							<SpeechBubble smallText={true}>
+								Play the next three questions in:{" "}
+								{Math.max(hours, 0)}:{Math.max(minutes, 0)}:
+								{Math.max(seconds, 0)}
+							</SpeechBubble>
+							<SpeechBubble smallText={true}>
+								Have some feedback or problems playing?
+							</SpeechBubble>
+						</div>
 
-				<SpeechBubble>
-					<span className={styles.text}>
-						Play the next three questions in: {Math.max(hours, 0)}:
-						{Math.max(minutes, 0)}:{Math.max(seconds, 0)}
-					</span>
-				</SpeechBubble>
-				<ul>
-					<SpeechBubble>
-						<li className={styles.text}>
-							Have some feedback or problems playing?
-						</li>
-					</SpeechBubble>
-					<SpeechBubble>
-						<a
-							href="https://forms.gle/vgaWQnhYm9M5jVNp6"
-							target={"_blank"}
-							rel="noreferrer"
-							className={styles.text}
-						>
-							Send your ideas
-						</a>
-					</SpeechBubble>
-					<SpeechBubble>
-						<a
-							target={"_blank"}
-							rel="noreferrer"
-							className={styles.text}
-							href="mailto:msrschildmeijer@gmail.com"
-						>
-							Email me
-						</a>
-					</SpeechBubble>
-					<SpeechBubble>
-						<a
-							target={"_blank"}
-							rel="noreferrer"
-							className={styles.text}
-							href="https://twitter.com/MarcianoSRS/"
-						>
-							Send me a tweet
-						</a>
-					</SpeechBubble>
-				</ul>
+						<div className={styles.social}>
+							<SpeechBubble smallText={true}>
+								<a
+									href="https://forms.gle/vgaWQnhYm9M5jVNp6"
+									target={"_blank"}
+									rel="noreferrer"
+									className={styles.text}
+								>
+									Send your ideas
+								</a>
+							</SpeechBubble>
+							<SpeechBubble smallText={true}>
+								<a
+									target={"_blank"}
+									rel="noreferrer"
+									className={styles.text}
+									href="mailto:msrschildmeijer@gmail.com"
+								>
+									Email me
+								</a>
+							</SpeechBubble>
+							<SpeechBubble smallText={true}>
+								<a
+									target={"_blank"}
+									rel="noreferrer"
+									className={styles.text}
+									href="https://twitter.com/MarcianoSRS/"
+								>
+									Send me a tweet
+								</a>
+							</SpeechBubble>
+						</div>
+					</section>
+				</section>
 			</section>
 		</dialog>
 	);
