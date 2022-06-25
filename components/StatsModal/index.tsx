@@ -86,6 +86,16 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 									target={"_blank"}
 									rel="noreferrer"
 									className={styles.text}
+									href="https://www.instagram.com/banjokazooiefurnacefun/"
+								>
+									Follow me on instagram
+								</a>
+							</SpeechBubble>
+							<SpeechBubble smallText={true}>
+								<a
+									target={"_blank"}
+									rel="noreferrer"
+									className={styles.text}
 									href="https://twitter.com/MarcianoSRS/"
 								>
 									Send me a tweet
