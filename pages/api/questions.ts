@@ -78,10 +78,56 @@ export default async function handler(
 
 	// TODO: Banjo Tooie
 
-	// const html2 = banjoTooiePage.split("General Knowledge");
-	// const scrapedBTQuestions = html2[1].split("render-wiki-recommendations")[0];
+	const html2 = banjoTooiePage.split('<div class="mw-parser-output">');
+	const scrapedBT = html2[1]
+		.split("x - Playing")[0]
+		.replace(/(<([^>]+)>)/gi, "")
+		.replace(/&nbsp;/i, "");
 
-	return res
-		.status(200)
-		.json({ questions: JSON.stringify([...BKQuestions]) } as any);
+	const questions2 = scrapedBT.split("?").map(
+		(question) =>
+			question
+				.split("\n")
+				.filter((a) => a)
+				.slice(-1)[0]
+	);
+
+	const answers2 = scrapedBT
+		.split("?")
+		.map((question) =>
+			question
+				.split("\n")
+				.filter((a) => a)
+				.slice(0, -1)
+		)
+		.slice(1);
+
+	const correctAnswer2 = scrapedBT.split("?").map((question) =>
+		question
+			.split("\n")
+			.filter((a) => a)
+			.find((text) => text.includes("o -"))
+			?.split("o -")[1]
+			.trim()
+	);
+
+	const BTQuestions = questions2.map((question, idx) => {
+		return {
+			id: `BT-${idx}`,
+			question: `${question}?`,
+			answers: answers2[idx]?.map((answer) =>
+				answer
+					.split(/x -|o -/)
+					.filter((a) => a)[0]
+					.trim()
+			),
+			correctAnswer: correctAnswer2[idx + 1],
+			game: "Banjo-Tooie",
+			questionType: "general",
+		};
+	});
+
+	return res.status(200).json({
+		questions: JSON.stringify([...BKQuestions, ...BTQuestions]),
+	} as any);
 }
