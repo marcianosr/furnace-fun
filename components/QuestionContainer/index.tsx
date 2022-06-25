@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState, useId } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "react-use";
 import ReactGA from "react-ga4";
 import StatsModal from "../StatsModal";
@@ -23,6 +24,15 @@ const preTextQuestion = [
 	"Here is the second question:",
 	"Here is your last question for today!",
 ];
+
+const setUserId = (stats: any, setStats: any) => {
+	if (!stats.userId) {
+		setStats({
+			...stats,
+			userId: uuidv4(),
+		});
+	}
+};
 
 const getRandomQuestion = (questions: any) =>
 	questions[Math.floor(Math.random() * questions.length)];
@@ -52,7 +62,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	// Refactor any later
 
 	const [stats, setStats] = useLocalStorage<any>("stats", {
-		id: useId(),
+		userId: uuidv4(),
 		gamesPlayed: 0,
 		maxStreak: 0,
 		currentStreak: 0,
@@ -77,6 +87,10 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 			setModal(true);
 		}
 	}, [questionIndex]);
+
+	useEffect(() => {
+		setUserId(stats, setStats);
+	}, [stats.userId]);
 
 	useEffect(() => {
 		const expired = hours + minutes + seconds <= 0 || isNaN(seconds);
@@ -136,8 +150,8 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 
 			ReactGA.event({
 				category: "Stats",
-				action: "Submitted question",
-				label: JSON.stringify(stats),
+				action: "Max streak by user",
+				label: `User id: ${stats.userId} / Max streak: ${stats.maxStreak}`,
 			});
 		}, 2000);
 	};
