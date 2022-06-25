@@ -38,7 +38,7 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 
 				<ul>
 					<SpeechBubble>
-						<li>Played: {stats.gamesPlayed}</li>
+						<li>Total questions answered: {stats.gamesPlayed}</li>
 					</SpeechBubble>
 					<SpeechBubble>
 						<li>Max. streak: {stats.maxStreak}</li>
