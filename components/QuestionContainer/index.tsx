@@ -96,7 +96,6 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		const expired = hours + minutes + seconds <= 0 || isNaN(seconds);
 
 		if (expired) {
-			console.log("return to game");
 			setModal(false);
 			setStats({
 				...stats,
