@@ -65,20 +65,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 
 	useEffect(() => {
 		if (stats.date) setModal(true);
-	}, []);
-
-	useEffect(() => {
-		const expired = hours + minutes + seconds <= 0;
-
-		if (expired) {
-			setModal(false);
-			setStats({
-				...stats,
-				date: null,
-			});
-			setQuestionIndex(0);
-		}
-	}, []);
+	}, [stats.date]);
 
 	useEffect(() => {
 		setCurrentQuestion(todaysQuestions[questionIndex]);
@@ -90,6 +77,20 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 			setModal(true);
 		}
 	}, [questionIndex]);
+
+	useEffect(() => {
+		const expired = hours + minutes + seconds <= 0 || isNaN(seconds);
+
+		if (expired) {
+			console.log("return to game");
+			setModal(false);
+			setStats({
+				...stats,
+				date: null,
+			});
+			setQuestionIndex(0);
+		}
+	}, []);
 
 	const submitAnswer = () => {
 		if (!answer) {
@@ -106,6 +107,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		);
 
 		setSubmitted(true);
+
 		setTimeout(() => {
 			setQuestionIndex(questionIndex + 1);
 
@@ -126,7 +128,10 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 					: stats.maxStreak,
 
 				correctAnswer: isCorrectAnswer,
-				date: stringTomorrowDate,
+				date:
+					questionIndex === QUESTIONS_PER_DAY - 1
+						? stringTomorrowDate
+						: null,
 			});
 
 			ReactGA.event({
