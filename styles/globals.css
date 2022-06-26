@@ -50,3 +50,7 @@ button {
 	background-color: transparent;
 	cursor: pointer;
 }
+
+p {
+	margin: 0;
+}

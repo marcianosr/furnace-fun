@@ -25,6 +25,11 @@ const Question: FC<QuestionProps> = ({
 	setIsClickedAnswer,
 	isSubmitted,
 }) => {
+	const splitQuestion = [
+		preTextQuestion,
+		...question?.question.match(/.{1,40}\S+/g),
+	];
+	console.log(splitQuestion);
 	return (
 		<>
 			<SpeechBubble
@@ -36,9 +41,12 @@ const Question: FC<QuestionProps> = ({
 				{text ? (
 					<p>{text}</p>
 				) : (
-					<p>
-						{preTextQuestion} {question?.question}
-					</p>
+					// <p>
+					// 	{preTextQuestion} {question?.question}
+					// </p>
+					splitQuestion?.map((text) => (
+						<p className={styles.animatedText}>{text}</p>
+					))
 				)}
 			</SpeechBubble>
 			<ul className={styles.answerContainer}>
