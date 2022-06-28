@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useId } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "react-use";
 import ReactGA from "react-ga4";
@@ -6,15 +6,10 @@ import StatsModal from "../StatsModal";
 import { useCountdown } from "../../hooks/useCountdown";
 import Question from "../Question";
 import styles from "../Question/styles.module.css";
+import { QuestionType } from "../../types";
 
 export type QuestionProps = {
-	questions: any;
-};
-
-export type QuestionType = {
-	question: string;
-	answers: string[];
-	correctAnswer: string;
+	questions: QuestionType;
 };
 
 const QUESTIONS_PER_DAY = 3;
@@ -41,6 +36,7 @@ export const checkAnswer = (givenAnswer: string, correctAnswer: string) =>
 	givenAnswer === correctAnswer;
 
 const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
+	console.log(questions);
 	const [todaysQuestions] = useState([
 		...Array.from({ length: QUESTIONS_PER_DAY }).map((_) =>
 			getRandomQuestion(questions)

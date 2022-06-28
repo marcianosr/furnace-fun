@@ -1,12 +1,13 @@
 import classNames from "classnames";
 import React, { FC, useState } from "react";
+import { QuestionType } from "../../types";
 import { checkAnswer } from "../QuestionContainer";
 import SpeechBubble from "../SpeechBubble";
 // import { QuestionType } from "./QuestionContainer";
 import styles from "./styles.module.css";
 
 export type AnswerProps = {
-	question?: any;
+	question?: QuestionType;
 	setAnswer: (answer: string) => void;
 	answer: string;
 	idx: number;
@@ -70,10 +71,10 @@ const Answer: FC<AnswerProps> = ({
 	isSubmitted,
 }) => {
 	const answerByLetter = answer.split("");
-	const isCorrectAnswer = checkAnswer(answer, question.correctAnswer);
+	const isCorrectAnswer = checkAnswer(answer, question?.correctAnswer || "");
 
 	return (
-		<li key={question}>
+		<li key={idx}>
 			<label
 				className={styles.answer}
 				onClick={() => {

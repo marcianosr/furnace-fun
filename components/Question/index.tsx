@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
+import { QuestionType } from "../../types";
 import Answer from "../Answer";
-import { QuestionType } from "../QuestionContainer";
 import SpeechBubble from "../SpeechBubble";
 import styles from "./styles.module.css";
 
@@ -42,7 +42,7 @@ const Question: FC<QuestionProps> = ({
 				)}
 			</SpeechBubble>
 			<ul className={styles.answerContainer}>
-				{question?.answers?.map((answer: any, idx: number) => (
+				{question?.answers?.map((answer, idx: number) => (
 					<Answer
 						key={answer}
 						answer={answer}
