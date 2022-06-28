@@ -41,6 +41,7 @@ export const checkAnswer = (givenAnswer: string, correctAnswer: string) =>
 	givenAnswer === correctAnswer;
 
 const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
+	// console.log(questions);
 	const [todaysQuestions] = useState([
 		...Array.from({ length: QUESTIONS_PER_DAY }).map((_) =>
 			getRandomQuestion(questions)
