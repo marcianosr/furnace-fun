@@ -1,12 +1,13 @@
 import classNames from "classnames";
 import React, { FC, useState } from "react";
+import { QuestionType } from "../../types";
 import { checkAnswer } from "../QuestionContainer";
 import SpeechBubble from "../SpeechBubble";
 // import { QuestionType } from "./QuestionContainer";
 import styles from "./styles.module.css";
 
 export type AnswerProps = {
-	question?: any;
+	question?: QuestionType;
 	setAnswer: (answer: string) => void;
 	answer: string;
 	idx: number;
@@ -47,7 +48,7 @@ enum CHARACTER_MUGS {
 const mugs = Object.values(CHARACTER_MUGS);
 
 const getRandNumbers = () => {
-	const set = new Set();
+	const set: Set<number> = new Set();
 
 	while (set.size !== 3) {
 		set.add(Math.floor(Math.random() * Object.keys(CHARACTER_MUGS).length));
@@ -56,9 +57,7 @@ const getRandNumbers = () => {
 	return set;
 };
 
-const getRandomMug: string[] = Array.from(getRandNumbers()).map((n) => {
-	return mugs[n as any];
-});
+const getRandomMug: string[] = Array.from(getRandNumbers()).map((n) => mugs[n]);
 
 const Answer: FC<AnswerProps> = ({
 	question,
@@ -70,10 +69,10 @@ const Answer: FC<AnswerProps> = ({
 	isSubmitted,
 }) => {
 	const answerByLetter = answer.split("");
-	const isCorrectAnswer = checkAnswer(answer, question.correctAnswer);
+	const isCorrectAnswer = checkAnswer(answer, question?.correctAnswer || "");
 
 	return (
-		<li key={question}>
+		<li key={idx}>
 			<label
 				className={styles.answer}
 				onClick={() => {
