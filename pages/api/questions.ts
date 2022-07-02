@@ -111,21 +111,28 @@ export default async function handler(
 			.trim()
 	);
 
-	const BTQuestions = questions2.map((question, idx) => {
-		return {
-			id: `BT-${idx}`,
-			question: `${question}?`,
-			answers: answers2[idx]?.map((answer) =>
-				answer
-					.split(/x -|o -/)
-					.filter((a) => a)[0]
-					.trim()
-			),
-			correctAnswer: correctAnswer2[idx + 1],
-			game: "Banjo-Tooie",
-			questionType: "general",
-		};
-	});
+	const BTQuestions = questions2
+		.map((question, idx) => {
+			return {
+				id: `BT-${idx}`,
+				question: `${question}?`,
+				answers: answers2[idx]?.map(
+					(answer) =>
+						answer
+							.split(/x -|o -/)
+							.filter((a) => a)[0]
+							.trim()
+							.split("(")[0]
+				),
+				correctAnswer: correctAnswer2[idx + 1],
+				game: "Banjo-Tooie",
+				questionType: "general",
+			};
+		})
+		.filter((question) => question.id !== "BT-261")
+		.filter((question) => question.id !== "BT-260")
+		.filter((question) => question.id !== "BT-259")
+		.filter((question) => question.id !== "BT-215");
 
 	return res.status(200).json({
 		questions: JSON.stringify([...BKQuestions, ...BTQuestions]),
