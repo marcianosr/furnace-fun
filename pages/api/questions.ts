@@ -2,13 +2,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
 
-type Data = {
-	questions: any;
+type StringifiedData = {
+	questions: string;
 };
 
 export default async function handler(
 	req: NextApiRequest,
-	res: NextApiResponse<Data>
+	res: NextApiResponse<StringifiedData>
 ) {
 	await NextCors(req, res, {
 		// Options
@@ -129,5 +129,5 @@ export default async function handler(
 
 	return res.status(200).json({
 		questions: JSON.stringify([...BKQuestions, ...BTQuestions]),
-	} as any);
+	});
 }

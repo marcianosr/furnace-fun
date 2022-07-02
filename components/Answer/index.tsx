@@ -48,7 +48,7 @@ enum CHARACTER_MUGS {
 const mugs = Object.values(CHARACTER_MUGS);
 
 const getRandNumbers = () => {
-	const set = new Set();
+	const set: Set<number> = new Set();
 
 	while (set.size !== 3) {
 		set.add(Math.floor(Math.random() * Object.keys(CHARACTER_MUGS).length));
@@ -57,9 +57,7 @@ const getRandNumbers = () => {
 	return set;
 };
 
-const getRandomMug: string[] = Array.from(getRandNumbers()).map((n) => {
-	return mugs[n as any];
-});
+const getRandomMug: string[] = Array.from(getRandNumbers()).map((n) => mugs[n]);
 
 const Answer: FC<AnswerProps> = ({
 	question,
