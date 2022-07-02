@@ -9,7 +9,7 @@ import styles from "../Question/styles.module.css";
 import { QuestionType } from "../../types";
 
 export type QuestionProps = {
-	questions: QuestionType;
+	questions: QuestionType[];
 };
 
 const QUESTIONS_PER_DAY = 3;

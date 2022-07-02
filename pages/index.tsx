@@ -6,10 +6,10 @@ import LightCanvas from "../components/LightCanvas";
 import QuestionContainer from "../components/QuestionContainer";
 import styles from "../styles/Home.module.css";
 import SpeechBubble from "../components/SpeechBubble";
+import { QuestionType } from "../types";
+import { StringifiedData } from "./api/questions";
 
-type Props = {};
-
-const getAllQuestions = (apiUrl: string) =>
+const getAllQuestions = (apiUrl: string): Promise<StringifiedData> =>
 	fetch(`${apiUrl}/api/questions`, {
 		method: "GET",
 		headers: {
@@ -22,8 +22,8 @@ const getAllQuestions = (apiUrl: string) =>
 			return error;
 		});
 
-const Home: NextPage<Props> = () => {
-	const [questions, setQuestions] = useState([]);
+const Home: NextPage = () => {
+	const [questions, setQuestions] = useState<QuestionType[]>([]);
 
 	useEffect(() => {
 		ReactGA.initialize("G-GN6M9J5562");

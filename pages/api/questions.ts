@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
 
-type StringifiedData = {
+export type StringifiedData = {
 	questions: string;
 };
 
