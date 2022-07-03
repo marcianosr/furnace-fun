@@ -1,0 +1,161 @@
+[
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Click Clock Wood",
+			"Mumbo's Mountain",
+			"Bubble Gloop Swamp"
+		],
+		"correctAnswer": "Click Clock Wood",
+		"imageUrl": "visual-question-images/ccw-1.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Freezeezy Peak",
+			"Click Clock Wood",
+			"Hail Fire Peaks (icy side)"
+		],
+		"correctAnswer": "Click Clock Wood",
+		"imageUrl": "visual-question-images/ccw-2.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Mayahem Temple", "Click Clock Wood", "Jinjo Village"],
+		"correctAnswer": "Click Clock Wood",
+		"imageUrl": "visual-question-images/ccw-3.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Gruntilda's Lair",
+			"Mumbo's Mountain",
+			"Bubble Gloop Swamp"
+		],
+		"correctAnswer": "Gruntilda's Lair",
+		"imageUrl": "visual-question-images/gl-1.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Gobi's Valley", "Treasure Trove Cove", "Gruntilda's Lair"],
+		"correctAnswer": "Gruntilda's Lair",
+		"imageUrl": "visual-question-images/gl-2.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Gruntilda's Lair", "Rusty Bucket Bay", "Click Clock Wood"],
+		"correctAnswer": "Rusty Bucket Bay",
+		"imageUrl": "visual-question-images/rbb-1.jpeg",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Gruntilda's Lair",
+			"Rusty Bucket Bay",
+			"Bubble Gloop Swamp"
+		],
+		"correctAnswer": "Rusty Bucket Bay",
+		"imageUrl": "visual-question-images/rbb-2.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Grunty's Industries",
+			"Rusty Bucket Bay",
+			"Glitter Gulch Mine"
+		],
+		"correctAnswer": "Rusty Bucket Bay",
+		"imageUrl": "visual-question-images/rbb-3.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Witchy World",
+			"Furnace Fun",
+			"Hailfire Peaks (fire side)"
+		],
+		"correctAnswer": "Furnace Fun",
+		"imageUrl": "visual-question-images/ff-1.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Mumbo's Mountain", "Spiral Mountain", "Isle 'O Hags"],
+		"correctAnswer": "Mumbo's Mountain",
+		"imageUrl": "visual-question-images/mm-1.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Treasure Trove Cove", "Spiral Mountain", "Gobi's Valley"],
+		"correctAnswer": "Treasure Trove Cove",
+		"imageUrl": "visual-question-images/ttc-1.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Treasure Trove Cove",
+			"Click Clock Wood",
+			"Jolly Rogers Lagoon"
+		],
+		"correctAnswer": "Treasure Trove Cove",
+		"imageUrl": "visual-question-images/ttc-2.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Click Clock Wood", "Glitter Gulch Mine", "Witchy World"],
+		"correctAnswer": "Glitter Gulch Mine",
+		"imageUrl": "visual-question-images/ggm-1.png",
+		"game": "Banjo-Tooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Rusty Bucket Bay", "Glitter Gulch Mine", "Witchy World"],
+		"correctAnswer": "Glitter Gulch Mine",
+		"imageUrl": "visual-question-images/ggm-2.png",
+		"game": "Banjo-Tooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Grunty's Industries",
+			"Glitter Gulch Mine",
+			"Rusty Bucket Bay"
+		],
+		"correctAnswer": "Glitter Gulch Mine",
+		"imageUrl": "visual-question-images/ggm-3.png",
+		"game": "Banjo-Tooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Jolly Rogers Lagoon",
+			"Treasure Trove Cove",
+			"Rusty Bucket Bay"
+		],
+		"correctAnswer": "Jolly Rogers Lagoon",
+		"imageUrl": "visual-question-images/jlr-1.png",
+		"game": "Banjo-Tooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Witchy World",
+			"Hail Fire Peaks (fire side)",
+			"Furnace Fun"
+		],
+		"correctAnswer": "Hail Fire Peaks (fire side)",
+		"imageUrl": "visual-question-images/hfp-1.png",
+		"game": "Banjo-Tooie"
+	}
+]
