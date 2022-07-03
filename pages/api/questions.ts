@@ -1,6 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
+import visualQuestionsData from "./visual-questions.json";
 
 export type StringifiedData = {
 	questions: string;
@@ -134,7 +135,17 @@ export default async function handler(
 		.filter((question) => question.id !== "BT-259")
 		.filter((question) => question.id !== "BT-215");
 
+	const visualQuestions = visualQuestionsData.map((questions, idx) => ({
+		...questions,
+		id: `VS-${idx}`,
+		questionType: "visual",
+	}));
+
 	return res.status(200).json({
-		questions: JSON.stringify([...BKQuestions, ...BTQuestions]),
+		questions: JSON.stringify([
+			// ...BKQuestions,
+			// ...BTQuestions,
+			...visualQuestions,
+		]),
 	});
 }

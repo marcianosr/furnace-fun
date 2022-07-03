@@ -11,9 +11,10 @@ export type AnswerProps = {
 	setAnswer: (answer: string) => void;
 	answer: string;
 	idx: number;
-	isClickedAnswer: number | null | undefined;
-	setIsClickedAnswer: (idx: number) => void;
-	isSubmitted: boolean;
+	isClickedAnswer?: number | null | undefined;
+	setIsClickedAnswer?: (idx: number) => void;
+	isSubmitted?: boolean;
+	isHidden?: boolean;
 };
 
 enum CHARACTER_MUGS {
@@ -67,6 +68,7 @@ const Answer: FC<AnswerProps> = ({
 	isClickedAnswer,
 	setIsClickedAnswer,
 	isSubmitted,
+	isHidden = false,
 }) => {
 	const answerByLetter = answer.split("");
 	const isCorrectAnswer = checkAnswer(answer, question?.correctAnswer || "");
@@ -77,13 +79,14 @@ const Answer: FC<AnswerProps> = ({
 				className={styles.answer}
 				onClick={() => {
 					setAnswer(answer);
-					setIsClickedAnswer(idx);
+					setIsClickedAnswer?.(idx);
 				}}
 				htmlFor={answer}
 			>
 				<SpeechBubble
 					mug={getRandomMug[idx]}
 					isActive={idx === isClickedAnswer}
+					mugOnly={isHidden}
 				>
 					<input
 						type="radio"

@@ -6,7 +6,7 @@ import StatsModal from "../StatsModal";
 import { useCountdown } from "../../hooks/useCountdown";
 import Question from "../Question";
 import styles from "../Question/styles.module.css";
-import { QuestionType } from "../../types";
+import { QuestionType, VisualQuestionGameStatus } from "../../types";
 
 export type QuestionProps = {
 	questions: QuestionType[];
@@ -36,14 +36,14 @@ export const checkAnswer = (givenAnswer: string, correctAnswer: string) =>
 	givenAnswer === correctAnswer;
 
 const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
-	// console.log(questions);
 	const [todaysQuestions] = useState([
 		...Array.from({ length: QUESTIONS_PER_DAY }).map((_) =>
 			getRandomQuestion(questions)
 		),
 	]);
+
 	const [questionIndex, setQuestionIndex] = useLocalStorage<any>("qindex", 0);
-	const [currentQuestion, setCurrentQuestion] = useState(
+	const [currentQuestion, setCurrentQuestion] = useState<QuestionType>(
 		todaysQuestions[questionIndex]
 	);
 
@@ -52,11 +52,15 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	const [isSubmitted, setSubmitted] = useState(false);
 
 	const [showInstructions, setShowInstructions] = useState(false);
+	const [gameStatus, setGameStatus] = useState({
+		visualImageStatus: VisualQuestionGameStatus.IMAGE_NOT_SHOWN,
+		timer: 5,
+		showImage: false,
+	});
 
 	const [date, setDate] = useState<Date>();
 
 	// Refactor any later
-
 	const [stats, setStats] = useLocalStorage<any>("stats", {
 		userId: uuidv4(),
 		gamesPlayed: 0,
@@ -68,6 +72,15 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 	const [_, hours, minutes, seconds] = useCountdown(stats.date || date);
 
 	const [modal, setModal] = useState(false);
+
+	const resetVisualChallenge = () => {
+		setGameStatus({
+			...gameStatus,
+			visualImageStatus: VisualQuestionGameStatus.IMAGE_NOT_SHOWN,
+			timer: 5,
+			showImage: false,
+		});
+	};
 
 	useEffect(() => {
 		if (stats.date) setModal(true);
@@ -120,6 +133,11 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		setTimeout(() => {
 			setQuestionIndex(questionIndex + 1);
 
+			console.log(currentQuestion);
+			if (currentQuestion.questionType === "visual") {
+				resetVisualChallenge();
+			}
+
 			const TOMORROW_IN_MS = 1 * 24 * 60 * 60 * 1000;
 			const NOW_IN_MS = new Date().getTime();
 			const tomorrow = NOW_IN_MS + TOMORROW_IN_MS;
@@ -165,6 +183,8 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 								isClickedAnswer={isClickedAnswer || null}
 								setIsClickedAnswer={setIsClickedAnswer}
 								isSubmitted={isSubmitted}
+								gameStatus={gameStatus}
+								setGameStatus={setGameStatus}
 							/>
 						) : (
 							<Question
@@ -175,6 +195,8 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 								isClickedAnswer={isClickedAnswer || null}
 								setIsClickedAnswer={setIsClickedAnswer}
 								isSubmitted={isSubmitted}
+								gameStatus={gameStatus}
+								setGameStatus={setGameStatus}
 							/>
 						)}
 					</>

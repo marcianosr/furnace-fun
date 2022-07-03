@@ -74,3 +74,12 @@ label .container:not(:hover) .active {
 	font-size: 1rem;
 	line-height: 1.25;
 }
+
+.mugOnly span {
+	display: none;
+}
+
+.mugOnly {
+	height: 100px;
+	width: 130px;
+}

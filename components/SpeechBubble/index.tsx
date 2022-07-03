@@ -10,6 +10,7 @@ type SpeechBubbleProps = {
 	largeMug?: boolean;
 	isActive?: boolean;
 	smallText?: boolean;
+	mugOnly?: boolean;
 };
 
 const SpeechBubble: FC<SpeechBubbleProps> = ({
@@ -20,9 +21,14 @@ const SpeechBubble: FC<SpeechBubbleProps> = ({
 	largeMug = false,
 	isActive = false,
 	smallText = false,
+	mugOnly = false,
 }) => {
 	return (
-		<div className={styles.container}>
+		<div
+			className={classnames(styles.container, {
+				[styles.mugOnly]: mugOnly,
+			})}
+		>
 			{mug && (
 				<img
 					className={classnames(styles.mug, {
