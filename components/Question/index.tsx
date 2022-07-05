@@ -82,10 +82,15 @@ const VisualQuestion: FC<QuestionProps> = ({
 	gameStatus,
 	setGameStatus,
 }) => {
+	const [startTimer, setStartTimer] = React.useState(false);
+
+	const onStartTimer = () => setStartTimer(true);
+
 	useEffect(() => {
 		const timer =
-			gameStatus.showImage === true &&
+			gameStatus.showImage &&
 			gameStatus.timer > 0 &&
+			startTimer &&
 			setInterval(
 				() =>
 					setGameStatus({
@@ -95,7 +100,8 @@ const VisualQuestion: FC<QuestionProps> = ({
 				1000
 			);
 
-		if (gameStatus.timer === 0) {
+		if (gameStatus.timer === 0 && startTimer) {
+			setStartTimer(false);
 			setGameStatus({
 				...gameStatus,
 				visualImageStatus: VisualQuestionGameStatus.IMAGE_SHOWN,
@@ -103,7 +109,7 @@ const VisualQuestion: FC<QuestionProps> = ({
 			});
 		}
 		return () => clearInterval(timer || "");
-	}, [gameStatus.timer, gameStatus.showImage]);
+	}, [gameStatus.timer, gameStatus.showImage, startTimer]);
 
 	return (
 		<>
@@ -143,6 +149,7 @@ const VisualQuestion: FC<QuestionProps> = ({
 					<ImageScreen
 						url={question?.imageUrl || ""}
 						time={gameStatus.timer}
+						startTimer={onStartTimer}
 					/>
 				</section>
 			)}

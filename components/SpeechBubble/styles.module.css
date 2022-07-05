@@ -30,7 +30,13 @@
 
 .largeMug {
 	left: -25px;
-	top: -63px;
+	top: -19px;
+}
+
+@media screen and (min-width: 48rem) {
+	.largeMug {
+		top: -63px;
+	}
 }
 
 .container input {
