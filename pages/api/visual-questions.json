@@ -30,6 +30,24 @@
 	},
 	{
 		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Mayahem Temple", "Click Clock Wood", "Jinjo Village"],
+		"correctAnswer": "Click Clock Wood",
+		"imageUrl": "visual-question-images/ccw-4.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Hailfire Peaks (icy side)",
+			"Click Clock Wood",
+			"Freezeezy Peak"
+		],
+		"correctAnswer": "Click Clock Wood",
+		"imageUrl": "visual-question-images/ccw-5.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
 		"answers": [
 			"Gruntilda's Lair",
 			"Mumbo's Mountain",
@@ -78,6 +96,24 @@
 	{
 		"question": "See the picture on your screen, where have you been?",
 		"answers": [
+			"Grunty's Industries",
+			"Rusty Bucket Bay",
+			"Glitter Gulch Mine"
+		],
+		"correctAnswer": "Rusty Bucket Bay",
+		"imageUrl": "visual-question-images/rbb-4.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Clankers Cavern", "Rusty Bucket Bay", "Click Clock Wood"],
+		"correctAnswer": "Rusty Bucket Bay",
+		"imageUrl": "visual-question-images/rbb-5.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
 			"Witchy World",
 			"Furnace Fun",
 			"Hailfire Peaks (fire side)"
@@ -91,6 +127,34 @@
 		"answers": ["Mumbo's Mountain", "Spiral Mountain", "Isle 'O Hags"],
 		"correctAnswer": "Mumbo's Mountain",
 		"imageUrl": "visual-question-images/mm-1.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Mumbo's Mountain", "Spiral Mountain", "Isle 'O Hags"],
+		"correctAnswer": "Mumbo's Mountain",
+		"imageUrl": "visual-question-images/mm-2.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Mumbo's Mountain", "Spiral Mountain", "Isle 'O Hags"],
+		"correctAnswer": "Mumbo's Mountain",
+		"imageUrl": "visual-question-images/mm-3.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Mumbo's Mountain", "Spiral Mountain", "Isle 'O Hags"],
+		"correctAnswer": "Mumbo's Mountain",
+		"imageUrl": "visual-question-images/mm-4.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Mad Monster Mansion", "Glitter Gulch Mine", "Witchyworld"],
+		"correctAnswer": "Mad Monster Mansion",
+		"imageUrl": "visual-question-images/mmm-1.png",
 		"game": "Banjo-Kazooie"
 	},
 	{
@@ -156,6 +220,79 @@
 		],
 		"correctAnswer": "Hail Fire Peaks (fire side)",
 		"imageUrl": "visual-question-images/hfp-1.png",
+		"game": "Banjo-Tooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Bubblegloop Swamp",
+			"Click Clock Wood (Spring)",
+			"Terrydactyland"
+		],
+		"correctAnswer": "Bubblegloop Swamp",
+		"imageUrl": "visual-question-images/bgs-1.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Bubblegloop Swamp",
+			"Terrydactyland",
+			"Click Clock Wood (Spring)"
+		],
+		"correctAnswer": "Bubblegloop Swamp",
+		"imageUrl": "visual-question-images/bgs-2.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Cloud Cuckooland",
+			"Bubblegloop Swamp",
+			"Click Clock Wood (Spring)"
+		],
+		"correctAnswer": "Bubblegloop Swamp",
+		"imageUrl": "visual-question-images/bgs-3.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Freezeezy Peak",
+			"Hailfire Peaks (icy side)",
+			"Click Clock Wood (Winter)"
+		],
+		"correctAnswer": "Freezeezy Peak",
+		"imageUrl": "visual-question-images/fp-1.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Freezeezy Peak",
+			"Hailfire Peaks (icy side)",
+			"Click Clock Wood (Winter)"
+		],
+		"correctAnswer": "Freezeezy Peak",
+		"imageUrl": "visual-question-images/fp-2.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": [
+			"Gobi's Valley",
+			"Treasure Trove Cove",
+			"Click Clock Wood (Summer)"
+		],
+		"correctAnswer": "Gobi's Valley",
+		"imageUrl": "visual-question-images/gb-1.png",
+		"game": "Banjo-Kazooie"
+	},
+	{
+		"question": "See the picture on your screen, where have you been?",
+		"answers": ["Jinjo Village", "Spiral Mountain", "Mayahem Temple"],
+		"correctAnswer": "Jinjo Village",
+		"imageUrl": "visual-question-images/jv-1.png",
 		"game": "Banjo-Tooie"
 	}
 ]
