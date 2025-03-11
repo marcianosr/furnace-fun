@@ -36,9 +36,9 @@ const Home: NextPage = () => {
 			? "http://localhost:3000"
 			: "https://furnace-fun.vercel.app";
 
-		getAllQuestions(apiUrl).then((data) =>
-			setQuestions(JSON.parse(data.questions))
-		);
+		getAllQuestions(apiUrl).then((data) => {
+			return setQuestions(JSON.parse(data.questions));
+		});
 	}, []);
 
 	return (
