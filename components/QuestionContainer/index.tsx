@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "react-use";
 import ReactGA from "react-ga4";
 import StatsModal from "../StatsModal";
-import { useCountdown } from "../../hooks/useCountdown";
 import Question from "../Question";
 import styles from "../Question/styles.module.css";
 import { QuestionType, VisualQuestionGameStatus } from "../../types";
@@ -12,12 +11,13 @@ export type QuestionProps = {
 	questions: QuestionType[];
 };
 
-const QUESTIONS_PER_DAY = 3;
-
 const preTextQuestion = [
-	"Here is your first question for today:",
-	"Here is the second question:",
-	"Here is your last question for today!",
+	"Here's a question, don’t be slow!",
+	"Not bad, but there's more to go!",
+	"Easy one, but don’t feel proud!",
+	"Your tiny brain makes me laugh loud!",
+	"Try again, but you won’t last!",
+	"Think you're smart? Not so fast!",
 ];
 
 const setUserId = (stats: any, setStats: any) => {
@@ -36,15 +36,11 @@ export const checkAnswer = (givenAnswer: string, correctAnswer: string) =>
 	givenAnswer === correctAnswer;
 
 const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
-	const [todaysQuestions] = useState([
-		...Array.from({ length: QUESTIONS_PER_DAY }).map((_) =>
-			getRandomQuestion(questions)
-		),
-	]);
-
-	const [questionIndex, setQuestionIndex] = useLocalStorage<any>("qindex", 0);
+	const [randomPreTextIndex, setRandomPreTextIndex] = useState(
+		Math.floor(Math.random() * preTextQuestion.length)
+	);
 	const [currentQuestion, setCurrentQuestion] = useState<QuestionType>(
-		todaysQuestions[questionIndex]
+		getRandomQuestion(questions)
 	);
 
 	const [answer, setAnswer] = useState("");
@@ -58,18 +54,14 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		showImage: false,
 	});
 
-	const [date, setDate] = useState<Date>();
-
 	// Refactor any later
 	const [stats, setStats] = useLocalStorage<any>("stats", {
 		userId: uuidv4(),
 		gamesPlayed: 0,
 		maxStreak: 0,
 		currentStreak: 0,
-		date: null,
 		correctAnswer: false,
 	});
-	const [_, hours, minutes, seconds] = useCountdown(stats.date || date);
 
 	const [modal, setModal] = useState(false);
 
@@ -82,37 +74,27 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		});
 	};
 
+	// Reset streak on new game
 	useEffect(() => {
-		if (stats.date) setModal(true);
-	}, [stats.date]);
+		setStats({
+			...stats,
+			currentStreak: 0,
+		});
+	}, []);
 
 	useEffect(() => {
-		setCurrentQuestion(todaysQuestions[questionIndex]);
+		setCurrentQuestion(getRandomQuestion(questions));
 		setAnswer("");
 		setIsClickedAnswer(null);
 		setSubmitted(false);
-
-		if (questionIndex === QUESTIONS_PER_DAY) {
-			setModal(true);
-		}
-	}, [questionIndex]);
+		setRandomPreTextIndex(
+			Math.floor(Math.random() * preTextQuestion.length)
+		);
+	}, [randomPreTextIndex]);
 
 	useEffect(() => {
 		setUserId(stats, setStats);
 	}, [stats.userId]);
-
-	useEffect(() => {
-		const expired = hours + minutes + seconds <= 0 || isNaN(seconds);
-
-		if (expired) {
-			setModal(false);
-			setStats({
-				...stats,
-				date: null,
-			});
-			setQuestionIndex(0);
-		}
-	}, []);
 
 	const submitAnswer = () => {
 		if (!answer) {
@@ -131,34 +113,22 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 		setSubmitted(true);
 
 		setTimeout(() => {
-			setQuestionIndex(questionIndex + 1);
+			setRandomPreTextIndex(randomPreTextIndex + 1);
 
-			console.log(currentQuestion);
 			if (currentQuestion.questionType === "visual") {
 				resetVisualChallenge();
 			}
 
-			const TOMORROW_IN_MS = 1 * 24 * 60 * 60 * 1000;
-			const NOW_IN_MS = new Date().getTime();
-			const tomorrow = NOW_IN_MS + TOMORROW_IN_MS;
-			const stringTomorrowDate = new Date(tomorrow);
-			setDate(stringTomorrowDate);
-
 			setStats({
 				...stats,
 				gamesPlayed: stats?.gamesPlayed + 1,
-				currentStreak: isCorrectAnswer ? stats.currentStreak + 1 : 0,
+				currentStreak: isCorrectAnswer
+					? stats.currentStreak + 1
+					: stats.currentStreak,
 				maxStreak: isCorrectAnswer
-					? stats.currentStreak >= stats.maxStreak
-						? stats.maxStreak + 1
-						: stats.maxStreak
+					? Math.max(stats.currentStreak + 1, stats.maxStreak)
 					: stats.maxStreak,
-
 				correctAnswer: isCorrectAnswer,
-				date:
-					questionIndex === QUESTIONS_PER_DAY - 1
-						? stringTomorrowDate
-						: null,
 			});
 
 			ReactGA.event({
@@ -166,6 +136,10 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 				action: "Max streak by user",
 				label: `User id: ${stats.userId} / Max streak: ${stats.maxStreak}`,
 			});
+
+			if (!isCorrectAnswer) {
+				setModal(true);
+			}
 		}, 2000);
 	};
 
@@ -188,7 +162,9 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 							/>
 						) : (
 							<Question
-								preTextQuestion={preTextQuestion[questionIndex]}
+								preTextQuestion={
+									preTextQuestion[randomPreTextIndex]
+								}
 								question={currentQuestion}
 								setAnswer={setAnswer}
 								submitAnswer={submitAnswer}
@@ -202,9 +178,7 @@ const QuestionContainer: FC<QuestionProps> = ({ questions }) => {
 					</>
 				)}
 			</section>
-			{modal && (
-				<StatsModal isOpen={modal} time={{ hours, minutes, seconds }} />
-			)}
+			{modal && <StatsModal isOpen={modal} />}
 		</>
 	);
 };

@@ -26,16 +26,19 @@ const Home: NextPage = () => {
 	const [questions, setQuestions] = useState<QuestionType[]>([]);
 
 	useEffect(() => {
-		ReactGA.initialize("G-GN6M9J5562");
-		ReactGA.send("pageview");
 		const dev = process.env.NODE_ENV !== "production";
+
+		if (!dev) {
+			ReactGA.initialize("G-GN6M9J5562");
+			ReactGA.send("pageview");
+		}
 		const apiUrl = dev
 			? "http://localhost:3000"
 			: "https://furnace-fun.vercel.app";
 
-		getAllQuestions(apiUrl).then((data) => {
-			return setQuestions(JSON.parse(data.questions));
-		});
+		getAllQuestions(apiUrl).then((data) =>
+			setQuestions(JSON.parse(data.questions))
+		);
 	}, []);
 
 	return (

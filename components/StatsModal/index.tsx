@@ -1,17 +1,14 @@
 import React, { FC } from "react";
 import { useLocalStorage } from "react-use";
-import { useCountdown } from "../../hooks/useCountdown";
 import SpeechBubble from "../SpeechBubble";
 import styles from "./styles.module.css";
 
 export type StatsModalProps = {
-	time: { hours: number; minutes: number; seconds: number };
 	isOpen: boolean;
 };
 
-const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
+const StatsModal: FC<StatsModalProps> = ({ isOpen }) => {
 	const [stats] = useLocalStorage<any>("stats");
-	const [_, hours, minutes, seconds] = useCountdown(stats.date);
 
 	return (
 		<dialog open={isOpen} className={styles.statsModal}>
@@ -36,8 +33,13 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 				</SpeechBubble>
 				<section className={styles.statsContainer}>
 					<h1 className={styles.title}>Stats</h1>
-
 					<section className={styles.bubbleContainer}>
+						<SpeechBubble>
+							<button onClick={() => window.location.reload()}>
+								REPLAY
+							</button>
+						</SpeechBubble>
+
 						<div className={styles.score}>
 							<SpeechBubble smallText={true}>
 								Total questions answered: {stats.gamesPlayed}
@@ -50,11 +52,6 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen, time }) => {
 							</SpeechBubble>
 						</div>
 						<div className={styles.nextGame}>
-							<SpeechBubble smallText={true}>
-								Play the next three questions in:{" "}
-								{Math.max(hours, 0)}:{Math.max(minutes, 0)}:
-								{Math.max(seconds, 0)}
-							</SpeechBubble>
 							<SpeechBubble smallText={true}>
 								Have some feedback or problems playing?
 							</SpeechBubble>

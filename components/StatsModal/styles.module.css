@@ -40,6 +40,17 @@
 	flex-direction: column;
 }
 
+.bubbleContainer a {
+	height: 100%;
+	display: block;
+}
+
+.bubbleContainer button {
+	color: white;
+	font-family: "Lithos Pro Black";
+	font-size: 2rem;
+}
+
 @media screen and (min-width: 48rem) {
 	.statsContainer {
 		margin-top: 4rem;
