@@ -27,7 +27,8 @@ export default async function handler(
 	).then((data) => data.text());
 
 	const html = banjoKazooiePage.split('<table class="wikitable prettytable"');
-	const scrapedBanjoKazooieQuestions = html[1].split("</table>")[0];
+
+	const scrapedBanjoKazooieQuestions = html[0].split("</table>")[0];
 
 	const scrapedBK = scrapedBanjoKazooieQuestions
 		.replace(/(<([^>]+)>)/gi, "")
