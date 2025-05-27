@@ -221,7 +221,7 @@ const GeneralQuestion: FC<QuestionProps> = ({
 				onClick={submitAnswer}
 				className={styles.button}
 			>
-				<span>Submit</span>
+				<span data-question-id={question?.id || ""}>Submit</span>
 			</button>
 		</ul>
 	</>

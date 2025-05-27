@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { useLocalStorage } from "react-use";
 import SpeechBubble from "../SpeechBubble";
+import Social from "../Social";
 import styles from "./styles.module.css";
 
 export type StatsModalProps = {
@@ -57,48 +58,7 @@ const StatsModal: FC<StatsModalProps> = ({ isOpen }) => {
 							</SpeechBubble>
 						</div>
 
-						<div className={styles.social}>
-							<SpeechBubble smallText={true}>
-								<a
-									href="https://forms.gle/vgaWQnhYm9M5jVNp6"
-									target={"_blank"}
-									rel="noreferrer"
-									className={styles.text}
-								>
-									Send your ideas
-								</a>
-							</SpeechBubble>
-							<SpeechBubble smallText={true}>
-								<a
-									target={"_blank"}
-									rel="noreferrer"
-									className={styles.text}
-									href="mailto:msrschildmeijer@gmail.com"
-								>
-									Email me
-								</a>
-							</SpeechBubble>
-							<SpeechBubble smallText={true}>
-								<a
-									target={"_blank"}
-									rel="noreferrer"
-									className={styles.text}
-									href="https://www.instagram.com/banjokazooiefurnacefun/"
-								>
-									Follow me on instagram
-								</a>
-							</SpeechBubble>
-							<SpeechBubble smallText={true}>
-								<a
-									target={"_blank"}
-									rel="noreferrer"
-									className={styles.text}
-									href="https://twitter.com/MarcianoSRS/"
-								>
-									Send me a tweet
-								</a>
-							</SpeechBubble>
-						</div>
+						<Social className={styles.social} />
 					</section>
 				</section>
 			</section>

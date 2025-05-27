@@ -1,0 +1,18 @@
+.social {
+	display: flex;
+	gap: 1rem;
+	flex-direction: column;
+}
+
+@media screen and (min-width: 48rem) {
+	.social {
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+}
+
+.text {
+	color: white;
+	font-family: "Lithos Pro Black";
+	text-decoration: none;
+}

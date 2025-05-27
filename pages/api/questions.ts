@@ -11,12 +11,15 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<StringifiedData>
 ) {
+	console.log("222");
 	await NextCors(req, res, {
 		// Options
 		methods: ["GET", "POST"],
 		origin: "*",
 		optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 	});
+
+	console.log("hs");
 
 	const banjoKazooiePage = await fetch(
 		"https://strategywiki.org/wiki/Banjo-Kazooie/Grunty%27s_Furnace_Fun"
@@ -41,6 +44,8 @@ export default async function handler(
 				.filter((a) => a)
 				.slice(-1)[0]
 	);
+
+	console.log("questions", questions);
 
 	const answers = scrapedBK
 		.split("?")
@@ -81,7 +86,8 @@ export default async function handler(
 	// TODO: Banjo Tooie
 
 	const html2 = banjoTooiePage.split('<div class="mw-parser-output">');
-	const scrapedBT = html2[1]
+
+	const scrapedBT = html2[0]
 		.split("x - Playing")[0]
 		.replace(/(<([^>]+)>)/gi, "")
 		.replace(/&nbsp;/i, "");
@@ -131,6 +137,7 @@ export default async function handler(
 				questionType: "general",
 			};
 		})
+		.filter((question) => question.id !== "BT-99")
 		.filter((question) => question.id !== "BT-261")
 		.filter((question) => question.id !== "BT-260")
 		.filter((question) => question.id !== "BT-259")
